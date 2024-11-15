@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Projeto Selvagem</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <main>
+        <!--INTRO-->
+        <div class="introSelvagem visible" id="introSelvagem">
+            <div class="teaser">
+                <video autoplay loop muted>
+                    <source src="data/teaser_crop.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="grid gridIntro">
+                <div>
+                    <p>Marco</p>
+                    <p>Martins</p>
+                    <p><br></p>
+                    <p><br></p>
+                    <p><br></p>
+                    <p><br></p>
+                    <p><br></p>
+                    <p><br></p>
+                    <p><br></p>
+                    <p><br></p>
+                    <p class="textAlignRight">e</p>
+                </div>
+                <div>
+                    <p>Alexandre</p>
+                    <p>Frazão</p>
+                    <p>Carolina Santos</p>
+                    <p>João Paulo</p>
+                    <p>Esteves da Silva</p>
+                    <p>Leon</p>
+                    <p>Baldesberger</p>
+                    <p>Mikhail Shumov</p>
+                    <p>Romeu</p>
+                    <p>Madeira</p>
+                    <p><br></p>
+                    <p>Zeca</p>
+                    <p>Medeiros</p>
+                </div>
+                <div>
+                    <p>a partir de</p>
+                    <p>“Selvagem”</p>
+                    <p class="textAlignRight">de</p>
+                    <p>Salvador Santos</p>
+                </div>
+                <div class="col-10-desktop">
+                    <p>Luz</p>
+                    <div id="buttonStart">
+                        <p>Começa a</p>
+                        <p class="textAlignRight">experiência</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXPERIÊNCIA -->
+        <div class="selvagemProgram hidden" id="selvagemProgram">
+            <div class="teaser">
+                <div>
+                    <div>
+                        <div id="loadingText" class="loading-text" style="display: none;">Loading...</div>
+
+                        <div class="interation hidden divTop slider">
+                            <!--<div class="progress" id="progressTop"></div>-->
+                            <div></div>
+                            <div>
+                                <p>Música</p>
+                            </div>
+                            <div></div>
+                            <div></div>
+                            <div class="mobileNone"></div>
+                            <div class="mobileNone"></div>
+                            <div class="mobileNone"></div>
+                            <div class="mobileNone"></div>
+                            <div class="mobileNone"></div>
+                            <div class="mobileNone"></div>
+                        </div>
+                        <div class="interation hidden divRight slider">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div>
+                                <p>Texto</p>
+                            </div>
+                            <div></div>
+                        </div>
+                        <div class="interation hidden divBottom slider">
+                            <div></div>
+                            <div>
+                                <p>Voz</p>
+                            </div>
+                            <div></div>
+                            <div></div>
+                            <div class="mobileNone"></div>
+                            <div class="mobileNone"></div>
+                            <div class="mobileNone"></div>
+                            <div class="mobileNone"></div>
+                            <div class="mobileNone"></div>
+                            <div class="mobileNone"></div>
+                        </div>
+                        <div class="interation hidden divLeft slider">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div>
+                                <p>Imagem</p>
+                            </div>
+                            <div></div>
+                        </div>
+
+                        <div class="track">
+                            <!--<div class="faixas">
+                                <p class="hover-link faixa" data-track="faixa1">1</p>
+                                <p class="hover-link faixa" data-track="faixa2">2</p>
+                                <p class="hover-link faixa" data-track="faixa3">3</p>
+                                <p class="hover-link faixa" data-track="faixa4">4</p>
+                                <p class="hover-link faixa" data-track="faixa5">5</p>
+                                <p class="hover-link faixa" data-track="faixa6">6</p>
+                                <p class="hover-link faixa" data-track="faixa7">7</p>
+                                <p class="hover-link faixa" data-track="faixa8">8</p>
+                            </div>-->
+
+
+                            <!----------------------------------------Track 1---------------------------------------->
+                            <div id="faixa1" class="track1 mediaTrack">
+                                <video class="video" preload="auto" data-src="data/track/1/Luz1_video.mp4">
+                                </video>
+                                <video class="legendas" muted data-src="data/faixas/1/legendas.mp4">
+                                </video>
+                                <audio class="poesia">
+                                    <source src="data/track/1/Luz1_voz.wav" type="audio/wav">
+                                </audio>
+                                <audio class="jazz">
+                                    <source src="data/track/1/Luz1_instrumental.wav" type="audio/wav">
+                                </audio>
+                            </div>
+
+                            <!----------------------------------------Track 2---------------------------------------->
+                            <div id="faixa2" class="track2 mediaTrack">
+                                <video class="video" preload="auto" data-src="data/track/2/Luz2_video.mp4">
+                                </video>
+                                <video class="legendas" muted data-src="data/faixas/1/legendas.mp4">
+                                </video>
+                                <audio class="poesia">
+                                    <source src="data/track/2/Luz2_voz.wav" type="audio/wav">
+                                </audio>
+                                <audio class="jazz">
+                                    <source src="data/track/2/Luz2_instrumental.wav" type="audio/wav">
+                                </audio>
+                            </div>
+
+                            <!----------------------------------------Track 3---------------------------------------->
+                            <div id="faixa3" class="track3 mediaTrack">
+                                <video class="video" preload="auto" data-src="data/track/3/Luz3_video.mp4">
+                                </video>
+                                <video class="legendas" muted data-src="data/faixas/1/legendas.mp4">
+                                </video>
+                                <audio class="poesia">
+                                    <source src="data/track/3/Luz3_voz.wav" type="audio/wav">
+                                </audio>
+                                <audio class="jazz">
+                                    <source src="data/track/3/Luz3_instrumental.wav" type="audio/wav">
+                                </audio>
+                            </div>
+
+                            <!----------------------------------------Track 4---------------------------------------->
+                            <div id="faixa4" class="track4 mediaTrack">
+                                <video class="video" preload="auto" data-src="data/track/4/Luz4_video.mp4">
+                                </video>
+                                <video class="legendas" muted data-src="data/faixas/1/legendas.mp4">
+                                </video>
+                                <audio class="poesia">
+                                    <source src="data/track/4/Luz4_voz.wav" type="audio/wav">
+                                </audio>
+                                <audio class="jazz">
+                                    <source src="data/track/4/Luz4_instrumental.wav" type="audio/wav">
+                                </audio>
+                            </div>
+
+                            <!----------------------------------------Track 5---------------------------------------->
+                            <div id="faixa5" class="track5 mediaTrack">
+                                <video class="video" preload="auto" data-src="data/track/5/Luz5_video.mp4">
+                                </video>
+                                <video class="legendas" muted data-src="data/faixas/1/legendas.mp4">
+                                </video>
+                                <audio class="poesia">
+                                    <source src="data/track/5/Luz5_voz.wav" type="audio/wav">
+                                </audio>
+                                <audio class="jazz">
+                                    <source src="data/track/5/Luz5_instrumental.wav" type="audio/wav">
+                                </audio>
+                            </div>
+
+                            <!----------------------------------------Track 6---------------------------------------->
+                            <div id="faixa6" class="track6 mediaTrack">
+                                <video class="video" preload="auto" data-src="data/track/6/Luz6_video.mp4">
+                                </video>
+                                <video class="legendas" muted data-src="data/faixas/1/legendas.mp4">
+                                </video>
+                                <audio class="poesia">
+                                    <source src="data/track/6/Luz6_voz.wav" type="audio/wav">
+                                </audio>
+                                <audio class="jazz">
+                                    <source src="data/track/6/Luz6_instrumental.wav" type="audio/wav">
+                                </audio>
+                            </div>
+
+                            <!----------------------------------------Track 7---------------------------------------->
+                            <div id="faixa7" class="track7 mediaTrack">
+                                <video class="video" preload="auto" data-src="data/track/7/Luz7_video.mp4">
+                                </video>
+                                <video class="legendas" muted data-src="data/faixas/1/legendas.mp4">
+                                </video>
+                                <audio class="poesia">
+                                    <source src="data/track/7/Luz7_voz.wav" type="audio/wav">
+                                </audio>
+                                <audio class="jazz">
+                                    <source src="data/track/7/Luz7_instrumental.wav" type="audio/wav">
+                                </audio>
+                            </div>
+
+                            <!----------------------------------------Track 8---------------------------------------->
+                            <div id="faixa8" class="track8 mediaTrack">
+                                <video class="video" preload="auto" data-src="data/track/8/Luz8_video.mp4">
+                                </video>
+                                <video class="legendas" muted data-src="data/faixas/1/legendas.mp4">
+                                </video>
+                                <audio class="poesia">
+                                    <source src="data/track/8/Luz8_voz.wav" type="audio/wav">
+                                </audio>
+                                <audio class="jazz">
+                                    <source src="data/track/8/Luz8_instrumental.wav" type="audio/wav">
+                                </audio>
+                            </div>
+                            <!----------------------------------------Track 9---------------------------------------->
+                            <div id="faixa9" class="track9 mediaTrack">
+                                <video class="video" preload="auto" data-src="data/track/9/Luz9_video.mp4">
+                                </video>
+                                <video class="legendas" muted data-src="data/faixas/1/legendas.mp4">
+                                </video>
+                                <audio class="poesia">
+                                    <source src="data/track/9/Luz9_voz.wav" type="audio/wav">
+                                </audio>
+                                <audio class="jazz">
+                                    <source src="data/track/9/Luz9_instrumental.wav" type="audio/wav">
+                                </audio>
+                            </div>
+                        </div>
+                        <!----------------------------------------Track 10---------------------------------------->
+                        <div id="faixa10" class="track10 mediaTrack">
+                            <video class="video" preload="auto" data-src="data/track/10/Luz10_video.mp4">
+                            </video>
+                            <video class="legendas" muted data-src="data/faixas/1/legendas.mp4">
+                            </video>
+                            <audio class="poesia">
+                                <source src="data/track/10/Luz10_voz.wav" type="audio/wav">
+                            </audio>
+                            <audio class="jazz">
+                                <source src="data/track/10/Luz10_instrumental.wav" type="audio/wav">
+                            </audio>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid gridProgram faixas">
+                    <div class="desktopNone"></div>
+                    <div>
+                        <p class="hover-link faixa textAlignRight faixaNum active-track" data-track="faixa1">01</p>
+                        <p class="hover-link faixa textAlignRight faixaNum" data-track="faixa2">02</p>
+                        <p class="hover-link faixa textAlignRight faixaNum" data-track="faixa3">03</p>
+                        <p class="hover-link faixa textAlignRight faixaNum" data-track="faixa4">04</p>
+                        <p><br></p>
+                        <p><br></p>
+                        <p class="hover-link faixa textAlignRight faixaNum" data-track="faixa5">05</p>
+                        <p class="hover-link faixa textAlignRight faixaNum" data-track="faixa6">06</p>
+                        <p class="hover-link faixa textAlignRight faixaNum" data-track="faixa7">07</p>
+                        <p><br></p>
+                        <p class="hover-link faixa textAlignRight faixaNum" data-track="faixa8">08</p>
+                        <p class="hover-link faixa textAlignRight faixaNum" data-track="faixa9">09</p>
+                        <p class="hover-link faixa textAlignRight faixaNum" data-track="faixa10">10</p>
+                    </div>
+                    <div class="faixaTitle">
+                        <p class="hover-link faixa faixaNum active-track" data-track="faixa1">Luz</p>
+                        <p class="hover-link faixa faixaNum" data-track="faixa2">Fim de Tarde</p>
+                        <p class="hover-link faixa faixaNum" data-track="faixa3">Instantâneo</p>
+                        <p class="hover-link faixa faixaNum" data-track="faixa4">Dependência /<br>Correntes
+                            <br>Marítimas
+                        </p>
+                        <p class="hover-link faixa faixaNum" data-track="faixa5">Periferia</p>
+                        <p class="hover-link faixa faixaNum" data-track="faixa6">O Cão Sozinho</p>
+                        <p class="hover-link faixa faixaNum" data-track="faixa7">Canção dos <br>Brancos Negros</p>
+                        <p class="hover-link faixa faixaNum" data-track="faixa8">Altura</p>
+                        <p class="hover-link faixa faixaNum" data-track="faixa9">Humanidade</p>
+                        <p class="hover-link faixa faixaNum" data-track="faixa10">Arqueologia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--LEGENDAS-->
+        <div class="selvagemSubtitles hidden" id="selvagemSubtitles">
+            <div class="teaser">
+                <video autoplay loop muted>
+                    <source src="data/teaser_crop.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="grid gridSubtitles">
+                <p class="textAlignRight faixaNum">10</p>
+                <p>Arqueologia</p>
+
+                <div class="col-2-width" id="legendas1">
+                    <div class="subtitlesContainer rightPad">
+                        <p>Não encontramos outra utilidade nesta geografia ausente.
+                            As maternidades são hospitais inúteis e a escola primária
+                            foi entregue a uma associação de caçadores.
+                            É tudo tão arcaico. O tédio das paredes. O bolor
+                            que se apodera das coisas e nos consome o pensamento.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-2-width" id="legendas2">
+                    <div class="subtitlesContainer rightPad">
+                        <p>Os dois estranhos que invadiram a rotina desta tarde
+                            são um acontecimento que ainda não deixou de usar
+                            uma língua estrangeira em assuntos imobiliários.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-2-width" id="legendas3">
+                    <div class="subtitlesContainer rightPad">
+                        <p>A miúda levou-lhes o menu e desinteressou-se deles.
+                            Ocupou-se por instantes com o jornal como se percorresse
+                            por obrigação as salas enfastiadas de um museu.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-2-width" id="legendas4">
+                    <div class="subtitlesContainer subtitlesSelected rightPad">
+                        <p>Os italianos talvez comprem uma ruína e voltem a erguer
+                            as paredes, mas não haverá crianças por cá.
+                            A única novidade serão eles, a casa que irão comprar e mais nada.
+                            Somamos um e o outro aos que cá estão e são mais dois
+                            a fazerem-se tarde. A demorarem-se entre nós.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!--OUTRO-->
+        <div class="outroSelvagem hidden" id="outroSelvagem">
+            <div class="teaser">
+                <video autoplay loop muted>
+                    <source src="data/teaser_crop.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="grid gridOutro">
+                <div>
+                    <p>Vídeo-álbum<br>inspirado na<br>obra<br>
+                        “Selvagem”, de<br>
+                        Salvador <br>Santos</p>
+                    <p class="textAlignRight">Dom Quixote</p>
+                    <p>2021</p>
+                </div>
+                <div class="mobileRow2">
+                    <p>Direcção<br>Artística:<br>
+                        Marco Martins</p>
+                    <p class="textAlignRight">e</p>
+                    <p class="textAlignRight">Carolina</p>
+                    <p>Santos</p>
+                </div>
+                <div>
+                    <p class="textAlignRight">Composição</p>
+                    <p class="textAlignRight">Baixo</p>
+                    <p>Marco Martins</p>
+                    <p class="textAlignRight">Bateria</p>
+                    <p>Alexandre Frazão</p>
+                    <p class="textAlignRight">Voz</p>
+                    <p class="textAlignRight">Carolina Santos</p>
+                    <p class="textAlignRight">Piano</p>
+                    <p>João Paulo<br>Esteves da Silva</p>
+                    <p class="textAlignRight">Trompete</p>
+                    <p>Leon<br>Baldesberger</p>
+                    <p class="textAlignRight">Violoncelo</p>
+                    <p>Mikhail<br>Shumov</p>
+                    <p class="textAlignRight">Violino</p>
+                    <p>Romeu<br>Madeira</p>
+                    <p class="textAlignRight">Participação<br>Especial</p>
+                    <p>Zeca Medeiros</p>
+                    <p><br></p>
+                    <p class="textAlignRight">Gravação</p>
+                    <p>Tiago Freitas</p>
+                    <p>Cineteatro Louletano</p>
+                    <p>Loulé, 12/13<br>Março 2024</p>
+                </div>
+                <div>
+                    <p class="textAlignRight">Mistura<br>e Masterização</p>
+                    <p class="textAlignRight">Tiago Freitas Audiomix Studio, Maio/Junho 2024</p>
+                    <p class="textAlignRight">Realização<br>e Pós-produção<br>Vídeo</p>
+                    <p class="textAlignRight">João Catarino</p>
+                    <p class="leftPad">Assistente<br>de Realização</p>
+                    <p>Beatriz<br>Medeiros</p>
+                    <p class="textAlignRight">Assistente<br>Estagiário</p>
+                    <p>Miguel Teixeira</p>
+                </div>
+                <div>
+                    <p class="textAlignRight">Intérpretes por<br>ordem de aparição</p>
+                    <p class="textAlignRight">Marco<br>Martins</p>
+                    <p>Carolina Santos</p>
+                    <p>Beatriz Medeiros</p>
+                    <p class="textAlignRight">Elizabeth Siw</p>
+                    <p>Alexandre<br>Martins</p>
+                    <p>Anabela Alves</p>
+                    <p class="textAlignRight">Zeca Medeiros</p>
+                    <p class="textAlignRight">Martim Santos</p>
+                </div>
+                <div>
+                    <p class="textAlignRight">Figuração Especial</p>
+                    <p>Ana Maria Teixier</p>
+                    <p>Alda Ramos</p>
+                    <p class="leftPad">Arminda Raposo</p>
+                    <p class="textAlignRight">Cesaltina Sousa</p>
+                    <p>Ermelinda Sousa</p>
+                    <p class="leftPad">Ilda Faria</p>
+                    <p class="leftPad">Irene Lino</p>
+                    <p>Maria Albertina</p>
+                    <p class="leftPad">Farinho</p>
+                    <p>Marieta Cavaco</p>
+                    <p class="leftPad">Olivia Catarino</p>
+                    <p>Alunos do 8º G</p>
+                    <p class="leftPad">e 7º/8º All</p>
+                    <p class="textAlignRight">Included 23/24<br>da Escola Básica<br>São Pedro do Mar<br> – Quarteira</p>
+                </div>
+                <div>
+                    <p class="textAlignRight">Design</p>
+                    <p>united by</p>
+                    <p class="textAlignRight">Direção de<br>Produção</p>
+                    <p class="leftPad">Ana Palmeiro</p>
+                    <p class="textAlignRight">Assistência<br>de Produção</p>
+                    <p class="leftPad">Rafaella<br>Ambrozio</p>
+                    <p class="textAlignRight">Gestão<br>Financeira</p>
+                    <p class="leftPad">Veronica<br>Vitorino</p>
+                    <p class="textAlignRight">Produção de</p>
+                    <p class="leftPad">Mákina de<br>Cena</p>
+                    <p class="textAlignRight">Apoios</p>
+                    <p class="leftPad">República<br>Portuguesa –<br>Cultura</p>
+                    <p class="textAlignRight"> Direção-Geral<br>das Artes</p>
+                    <p class="leftPad">Município de</p>
+                    <p>Loulé</p>
+                    <p class="leftPad">Cineteatro</p>
+                    <p class="textAlignRight">Louletano</p>
+                </div>
+                <div>
+                    <p class="textAlignRight">Agradecimentos</p>
+                    <p>Universidade<br>Sénior de Loulé</p>
+                    <p class="leftPad">- Associação</p>
+                    <p>Amigos do</p>
+                    <p class="leftPad">Alentejo</p>
+                    <p>Agrupamento de</p>
+                    <p class="leftPad">Escolas Dr.<br>Laura Ayres</p>
+                    <p>Quarteira</p>
+                    <p class="textAlignRight">Conservatório<br>de Música</p>
+                    <p>de Loulé</p>
+                    <p>Galerias Municipais</p>
+                    <p class="textAlignRight">- Loulé</p>
+                    <p>CAMA AC</p>
+                    <p class="leftPad">José</p>
+                    <p class="textAlignRight">e Fernanda<br>Palmeiro</p>
+                    <p>Catherina</p>
+                    <p class="leftPad">Cardoso</p>
+                    <p>Fábio Teixeira</p>
+                    <p class="textAlignRight">Joana Oliveira</p>
+                    <p>Mauro Coelho</p>
+                    <p>Nazar Lutsyak</p>
+                    <p class="leftPad">Tânia</p>
+                    <p class="textAlignRight">Teixeira</p>
+                </div>
+                <div>
+                    <p class="textAlignRight">Marco Martins<br>toca com</p>
+                    <p>instrumentos</p>
+                    <p class="textAlignRight">JP Custom Guitars</p>
+                    <a href="https://jpcustomguitars.pt/" target="_blank">
+                        <p>www.<br>jpcustomguitars</p>
+                        <p class="textAlignRight">.pt</p>
+                    </a>
+                    <p>A Mákina de</p>
+                    <p class="textAlignRight">Cena</p>
+                    <p>é ums estrutura<br>financiada pela</p>
+                    <p class="textAlignRight">República Portuguesa – Cultura /</p>
+                    <p>Direção-Geral das<br>Artes e<br>pelo Município de<br>Loulé.</p>
+                </div>
+                <div>
+                    <p>Reservados todos os direitos do produtor fonográfico e do proprietário da obra gravada,</p>
+                    <p class="textAlignRight">proibidos</p>
+                    <p>a<br>duplicação, o
+                        aluguer, o empréstimo e a utilização da gravação para execução pública </p>
+                    <p class="textAlignRight">e radiodifusão</p>
+                    <p>não autorizados</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div id="cursor"></div>
+    <script src="js/mobileWeight.js"></script>
+    <script src="js/script_final.js"></script>
+</body>
+
+</html>
