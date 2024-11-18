@@ -444,5 +444,3 @@ touchDivs.forEach((div) => {
   div.addEventListener("touchstart", activateDiv);
   div.addEventListener("touchend", deactivateDiv);
 });
-
-
