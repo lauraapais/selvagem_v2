@@ -49,8 +49,8 @@ body {
   overscroll-behavior-y: contain;
 }
 
-a{
-   color:white; 
+a {
+  color: white;
 }
 body {
   background-color: var(--bg-color);
@@ -378,11 +378,9 @@ p {
   padding-right: var(--desktopFontSize);
 }
 
-.textAlignRight1{
-    text-align: right;
+.textAlignRight1 {
+  text-align: right;
 }
-
-
 
 .leftPad {
   padding-left: var(--desktopFontSize);
@@ -391,7 +389,6 @@ p {
 .rightPad {
   padding-right: var(--desktopFontSize);
 }
-
 
 /*Intro*/
 /* Configuração padrão para desktop */
@@ -489,44 +486,40 @@ p {
   grid-column: 8 / 10;
 }
 
-.teaser video {
-    display: none;
-  }
-  
-  .teaser .activeVideo {
-    display: block;
-  }
-  
-  .introSelvagem .teaser video , .enterSelvagem .teaser video {
-    display: block !important;
-  }
-  
-  button {
-    all: unset;
-    display: inline;
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-    width:100%;
-  }
-  
-  input {
-    all: unset;
-    border-bottom: 1px solid white;
-    font-size: var(--desktopFontSize);
-      color: white;
-  }
-  
-  input::placeholder { 
-      font-size: var(--desktopFontSize);
-      color: white;
-  background-color: transparent; 
-  }
-  
-  #submitPassword:hover{
-      font-weight: bold;
-  }
-  
+.teaser .activeVideo {
+  display: block;
+}
+
+.introSelvagem .teaser video,
+.enterSelvagem .teaser video {
+  display: block !important;
+}
+
+button {
+  all: unset;
+  display: inline;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  width: 100%;
+}
+
+input {
+  all: unset;
+  border-bottom: 1px solid white;
+  font-size: var(--desktopFontSize);
+  color: white;
+}
+
+input::placeholder {
+  font-size: var(--desktopFontSize);
+  color: white;
+  background-color: transparent;
+}
+
+#submitPassword:hover {
+  font-weight: bold;
+}
 
 /* Ajustes para dispositivos móveis */
 @media (max-width: 768px) {
@@ -542,8 +535,8 @@ p {
   /* Intro */
   .gridIntro {
     grid-template-columns: repeat(3, 1fr) !important;
-    height: calc(var(--vh, 1h)* 100 - var(--marginTop)* 1.5);
-}
+    height: calc(var(--vh, 1h) * 100 - var(--marginTop) * 1.5);
+  }
   .gridIntro .col-10-desktop {
     grid-column: 3 / 4;
   }
@@ -561,25 +554,25 @@ p {
   .divTop {
     top: 0;
   }
-  
+
   .divBottom {
     position: absolute;
     bottom: 0;
   }
 
   .divRight,
-.divLeft {
-  width: 30px;
-}
+  .divLeft {
+    width: 30px;
+  }
 
-.divTop,
-.divBottom {
-  height: 30px;
-}
+  .divTop,
+  .divBottom {
+    height: 30px;
+  }
 
-.luzTitle{
+  .luzTitle {
     text-align: right;
-}
+  }
 
   .divRight,
   .divLeft {
@@ -626,10 +619,9 @@ p {
     grid-column: 1 / 2;
   }
 
-  input::placeholder { 
+  input::placeholder {
     font-size: var(--mobileFontSize);
     color: white;
-background-color: transparent; 
+    background-color: transparent;
+  }
 }
-}
-
