@@ -447,14 +447,13 @@ p {
     padding-right: var(--desktopFontSize);
 }
 
-.faixaTitle .faixaNum:hover {
+.faixaNum:hover {
     font-weight: bold;
 }
-.faixaNum.active-track {
+.active-track {
     font-weight: bold;
   }
   
-
 /* Define os estados de visibilidade */
 .hidden {
     opacity: 0;

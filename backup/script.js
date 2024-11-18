@@ -315,3 +315,42 @@ buttonStart.addEventListener('click', () => {
         }, 50); 
     }, 400); 
 });
+
+
+
+/*Adicional*/
+function stopCurrentTrack() {
+    if (jazzAudio) {
+      jazzAudio.pause();
+      jazzAudio.currentTime = 0; // Reinicia o áudio
+      jazzAudio.removeAttribute("style");
+    }
+    if (poesiaAudio) {
+      poesiaAudio.pause();
+      poesiaAudio.currentTime = 0; // Reinicia o áudio
+      poesiaAudio.removeAttribute("style");
+    }
+    if (videoElement) {
+      videoElement.pause();
+      videoElement.currentTime = 0; // Reinicia o vídeo
+      videoElement.removeAttribute("style");
+    }
+    if (legendasVideo) {
+      legendasVideo.pause();
+      legendasVideo.currentTime = 0; // Reinicia as legendas
+      legendasVideo.removeAttribute("style");
+    }
+  }
+
+  function loadVideo(videoElement, src) {
+    videoElement.pause();
+    videoElement.src = src;
+    videoElement.load();
+    videoElement.oncanplay = () => {
+      videoElement.play();
+    };
+    videoElement.onerror = (e) => {
+      console.error("Error loading video:", e);
+    };
+  }
+  

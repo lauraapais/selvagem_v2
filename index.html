@@ -121,19 +121,18 @@
                         </div>
 
                             <!----------------------------------------Track 1---------------------------------------->
-                            <div id="faixa1" class="track1 mediaTrack">
-                                <video class="video" preload="auto" data-src="data/track/1/Luz1_video.mp4">
-                                </video>
-                                <video class="legendas" muted data-src="data/faixas/1/legendas.mp4">
-                                </video>
-                                <audio class="poesia">
-                                    <source src="data/track/1/Luz1_voz.wav" type="audio/wav">
-                                </audio>
-                                <audio class="jazz">
-                                    <source src="data/track/1/Luz1_instrumental.wav" type="audio/wav">
-                                </audio>
-                            </div>
-
+                          <!----------------------------------------Track 1---------------------------------------->
+<div id="faixa1" class="track1 mediaTrack hidden">
+    <video class="video" preload="auto" data-src="data/track/1/Luz1_video.mp4"></video>
+    <video class="legendas" muted preload="auto" data-src="data/faixas/1/legendas.mp4"></video>
+    <audio class="poesia">
+      <source src="data/track/1/Luz1_voz.wav" type="audio/wav">
+    </audio>
+    <audio class="jazz">
+      <source src="data/track/1/Luz1_instrumental.wav" type="audio/wav">
+    </audio>
+  </div>
+  
                             <!----------------------------------------Track 2---------------------------------------->
                             <div id="faixa2" class="track2 mediaTrack">
                                 <video class="video" preload="auto" data-src="data/track/2/Luz2_video.mp4">
@@ -449,7 +448,7 @@
     </main>
     <div id="cursor"></div>
     <script src="js/mobileWeight.js"></script>
-    <script src="js/script_final.js"></script>
+    <script src="js/script_final_v2.js"></script>
 </body>
 
 </html>

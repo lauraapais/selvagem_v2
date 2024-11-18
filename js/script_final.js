@@ -432,41 +432,34 @@ touchDivs.forEach((div) => {
 });
 
 
+document.querySelectorAll(".faixaNum").forEach((trackButton) => {
+  trackButton.addEventListener("click", (event) => {
+    // Obtemos a track correspondente ao botão clicado
+    const trackId = event.target.getAttribute("data-track");
 
-/*Adicional*/
-function stopCurrentTrack() {
-  if (jazzAudio) {
-    jazzAudio.pause();
-    jazzAudio.src = ""; // Libera o recurso
-    jazzAudio.removeAttribute('style');
-  }
-  if (poesiaAudio) {
-    poesiaAudio.pause();
-    poesiaAudio.src = ""; // Libera o recurso
-    poesiaAudio.removeAttribute('style');
-  }
-  if (videoElement) {
-    videoElement.pause();
-    videoElement.src = ""; // Libera o recurso
-    videoElement.removeAttribute('style');
+    // Alterar a faixa atual para a clicada
+    currentTrackIndex = parseInt(trackId.replace("faixa", "")) - 1;
 
-  }
-  if (legendasVideo) {
-    legendasVideo.pause();
-    legendasVideo.src = ""; // Libera o recurso
-    legendasVideo.removeAttribute('style');
+    // Atualiza o visual (remove e aplica a classe de 'active-track')
+    document.querySelectorAll(".faixaNum").forEach((button) => {
+      button.classList.remove("active-track");
+    });
+    event.target.classList.add("active-track");
 
-  }
+    // Pausar qualquer reprodução em andamento e resetar
+    stopAllTracks();
+
+    // Reproduzir a track correspondente
+    playCurrentTrack();
+  });
+});
+
+// Função para parar todas as faixas
+function stopAllTracks() {
+  document.querySelectorAll(".mediaTrack").forEach((track) => {
+    track.querySelectorAll("audio, video").forEach((media) => {
+      media.pause();
+      media.currentTime = 0;
+    });
+  });
 }
-function loadVideo(videoElement, src) {
-  videoElement.pause();
-  videoElement.src = src;
-  videoElement.load();
-  videoElement.oncanplay = () => {
-    videoElement.play();
-  };
-  videoElement.onerror = (e) => {
-    console.error("Error loading video:", e);
-  };
-}
-
