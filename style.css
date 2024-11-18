@@ -450,7 +450,10 @@ p {
 .faixaTitle .faixaNum:hover {
     font-weight: bold;
 }
-
+.faixaNum.active-track {
+    font-weight: bold;
+  }
+  
 
 /* Define os estados de visibilidade */
 .hidden {
