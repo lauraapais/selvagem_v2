@@ -594,3 +594,7 @@ p {
 .teaser .activeVideo {
     display: block;
 }
+
+.introSelvagem .teaser video{
+    display: block!important;
+}
