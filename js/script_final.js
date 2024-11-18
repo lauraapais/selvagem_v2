@@ -40,20 +40,7 @@ faixaElements.forEach((faixa) => {
   faixa.setAttribute("disabled", true);
 });
 
-//videoElement.style.display = "none";
-legendasVideo.style.display = "none";
 
-/*document.addEventListener('DOMContentLoaded', function () {
-  var videos = videoElement.querySelectorAll(".video");
-
-  videos.forEach(function (video) {
-    video.setAttribute('preload', 'auto');
-
-    video.onloadeddata = function () {
-      console.log(video.src + ' has loaded');
-    };
-  });
-});*/
 
 
 let interactionEnabled = false;
@@ -65,7 +52,6 @@ function setInitialProgress() {
   legendasVideo.style.opacity = 0.3;
 }
 
-// Adicionando o cursor customizado
 const cursor = document.getElementById("cursor");
 document.addEventListener("mousemove", (e) => {
   const mouseX = e.clientX;
@@ -118,15 +104,7 @@ buttonStart.addEventListener("click", () => {
   });
 
   loadingText.style.display = "block";
-
-  /*if (!videoElement.src) {
-    videoElement.src = videoElement.getAttribute("data-src");
-  }*/
   videoElement.load();
-
-  /*if (!legendasVideo.src) {
-    legendasVideo.src = legendasVideo.getAttribute("data-src");
-  }*/
   legendasVideo.load();
 
   ensureMediaReady(jazzAudio, checkMediaReady);
@@ -136,30 +114,28 @@ buttonStart.addEventListener("click", () => {
 });
 
 function stopCurrentTrack() {
-  // Function to stop and clear current media elements
   if (jazzAudio) {
     jazzAudio.pause();
-    jazzAudio.currentTime = 0; // Reset to start
+    jazzAudio.currentTime = 0; 
     jazzAudio.removeAttribute('style');
   }
   if (poesiaAudio) {
     poesiaAudio.pause();
-    poesiaAudio.currentTime = 0; // Reset to start
+    poesiaAudio.currentTime = 0;
     poesiaAudio.removeAttribute('style');
   }
   if (videoElement) {
     videoElement.pause();
-    videoElement.currentTime = 0; // Reset to start
+    videoElement.currentTime = 0;
     videoElement.removeAttribute('style');
     videoElement.classList.remove("activeVideo");
   }
   if (legendasVideo) {
     legendasVideo.pause();
-    legendasVideo.currentTime = 0; // Reset to start
+    legendasVideo.currentTime = 0; 
     legendasVideo.removeAttribute('style');
   }
 
-  // Reset media elements
   jazzAudio = null;
   poesiaAudio = null;
   videoElement = null;
@@ -167,17 +143,15 @@ function stopCurrentTrack() {
 }
 
 function playTrack(trackElement) {
-  stopCurrentTrack(); // Ensure all current media elements are stopped and reset
+  stopCurrentTrack(); 
 
   loadingText.style.display = "block";
   currentTrack = trackElement;
 
-  // Remove 'active-track' class from all track elements
   faixaElements.forEach((faixa) => faixa.classList.remove("active-track"));
   const faixaTitles = document.querySelectorAll(".faixaTitle .faixa");
   faixaTitles.forEach((faixa) => faixa.classList.remove("active-track"));
 
-  // Select new media elements
   jazzAudio = currentTrack.querySelector(".jazz");
   poesiaAudio = currentTrack.querySelector(".poesia");
   videoElement = currentTrack.querySelector(".video");
@@ -186,32 +160,7 @@ function playTrack(trackElement) {
   console.log(videoElement);
 
   videoElement.play();
-  poesiaAudio.play();
-  legendasVideo.play();
-  jazzAudio.play();
 
-  // Load the first source element
-  /*const videoSource = videoElement.querySelector("source");
-  if (videoSource) {
-    videoElement.src = videoSource.getAttribute("src");
-  }
-
-  const legendasSource = legendasVideo.querySelector("source");
-  if (legendasSource) {
-    legendasVideo.src = legendasSource.getAttribute("src");
-  }*/
-
-  // Load media elements
-  /*videoElement.load();
-  legendasVideo.load();*/
-
-  // Ensure all media elements are ready to play
-  /*ensureMediaReady(jazzAudio, checkMediaReady);
-  ensureMediaReady(poesiaAudio, checkMediaReady);
-  ensureMediaReady(videoElement, checkMediaReady);
-  ensureMediaReady(legendasVideo, checkMediaReady);*/
-
-  // Add 'active-track' class to the current track and title
   const trackId = trackElement.id; 
   const activeFaixa = document.querySelector(`[data-track="${trackId}"]`);
   const activeTitle = document.querySelector(`.faixaTitle .faixa[data-track="${trackId}"]`);
@@ -251,10 +200,10 @@ function handleTouchMove(
   }
 }
 
-const divTop = document.querySelector(".divTop"); // Música/Jazz
-const divRight = document.querySelector(".divRight"); // Texto/Legendas
-const divLeft = document.querySelector(".divLeft"); // Imagem/Vídeo
-const divBottom = document.querySelector(".divBottom"); // Voz/Poesia
+const divTop = document.querySelector(".divTop");
+const divRight = document.querySelector(".divRight");
+const divLeft = document.querySelector(".divLeft"); 
+const divBottom = document.querySelector(".divBottom"); 
 
 const progressJazz = divTop.querySelector(".progress");
 const progressVideo = divLeft.querySelector(".progress");
@@ -267,7 +216,6 @@ divTop.addEventListener("mousemove", (e) => {
   const rect = divTop.getBoundingClientRect();
   const volume = adjustValue(e.clientX, rect.left + 50, rect.right - 50);
   jazzAudio.volume = volume;
-  /* updateProgressBar(progressJazz, volume, true);*/
 
   cursor.style.width = `${2 + volume * 4}em`;
   cursor.style.height = `${2 + volume * 4}em`;
@@ -293,7 +241,6 @@ divRight.addEventListener("mousemove", (e) => {
   const rect = divRight.getBoundingClientRect();
   const opacity = 1 - adjustValue(e.clientY, rect.top + 50, rect.bottom - 50);
   legendasVideo.style.opacity = opacity;
-  /* updateProgressBar(progressLegendas, opacity, false);*/
 
   cursor.style.width = `${2 + opacity * 4}em`;
   cursor.style.height = `${2 + opacity * 4}em`;
@@ -307,7 +254,6 @@ divRight.addEventListener("touchmove", (e) => {
     divRight,
     (opacity) => {
       legendasVideo.style.opacity = 1 - opacity;
-      /* updateProgressBar(progressLegendas, opacity, false); */
     },
     false
   );
@@ -319,7 +265,6 @@ divBottom.addEventListener("mousemove", (e) => {
   const rect = divBottom.getBoundingClientRect();
   const volume = adjustValue(e.clientX, rect.left + 50, rect.right - 50);
   poesiaAudio.volume = volume;
-  /* updateProgressBar(progressPoesia, volume, true); */
 
   cursor.style.width = `${2 + volume * 4}em`;
   cursor.style.height = `${2 + volume * 4}em`;
@@ -333,10 +278,9 @@ divBottom.addEventListener("touchmove", (e) => {
     divBottom,
     (volume) => {
       poesiaAudio.volume = volume;
-      /* updateProgressBar(progressPoesia, volume, true); */
     },
     true
-  ); // A interação na divBottom é horizontal
+  ); 
 });
 
 divLeft.addEventListener("mousemove", (e) => {
@@ -345,7 +289,6 @@ divLeft.addEventListener("mousemove", (e) => {
   const rect = divLeft.getBoundingClientRect();
   const opacity = 1 - adjustValue(e.clientY, rect.top + 50, rect.bottom - 50);
   videoElement.style.opacity = opacity;
-  /* updateProgressBar(progressVideo, opacity, false); */
 
   cursor.style.width = `${2 + opacity * 4}em`;
   cursor.style.height = `${2 + opacity * 4}em`;
@@ -359,7 +302,6 @@ divLeft.addEventListener("touchmove", (e) => {
     divLeft,
     (opacity) => {
       videoElement.style.opacity = 1 - opacity;
-      /* updateProgressBar(progressVideo, opacity, false); */
     },
     false
   );
@@ -418,7 +360,6 @@ window.addEventListener("mousemove", resetInactivityTimer);
 window.addEventListener("touchmove", resetInactivityTimer);
 hideInteractions();
 
-//Feedback Interação Programa
 const touchDivs = document.querySelectorAll(
   ".divTop div, .divBottom div, .divRight div, .divLeft div"
 );
@@ -443,4 +384,26 @@ function deactivateDiv(event) {
 touchDivs.forEach((div) => {
   div.addEventListener("touchstart", activateDiv);
   div.addEventListener("touchend", deactivateDiv);
+});
+
+
+const videoFaixa10 = document.getElementById("videoFaixa10"); // Assumindo que o vídeo da faixa 10 tem o id "videoFaixa10"
+const outroSelvagem = document.getElementById("outroSelvagem");
+
+videoFaixa10.addEventListener("ended", () => {
+  // Quando o vídeo da faixa 10 terminar
+  selvagemProgram.style.opacity = "0"; // Inicia a transição de opacidade para ocultar
+
+  setTimeout(() => {
+    selvagemProgram.classList.remove("visible");
+    selvagemProgram.classList.add("hidden");
+
+    outroSelvagem.classList.remove("hidden");
+    outroSelvagem.classList.add("visible");
+    outroSelvagem.style.opacity = "0"; // Inicialmente oculta
+
+    setTimeout(() => {
+      outroSelvagem.style.opacity = "1"; // Faz a transição de opacidade para visível
+    }, 50);
+  }, 400); // Tempo da transição deve corresponder ao tempo do CSS
 });

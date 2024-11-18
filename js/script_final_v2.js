@@ -41,7 +41,7 @@ faixaElements.forEach((faixa) => {
 });
 
 //videoElement.style.display = "none";
-legendasVideo.style.display = "none";
+//legendasVideo.style.display = "none";
 
 /*document.addEventListener('DOMContentLoaded', function () {
   var videos = videoElement.querySelectorAll(".video");
@@ -186,9 +186,6 @@ function playTrack(trackElement) {
   console.log(videoElement);
 
   videoElement.play();
-  poesiaAudio.play();
-  legendasVideo.play();
-  jazzAudio.play();
 
   // Load the first source element
   /*const videoSource = videoElement.querySelector("source");

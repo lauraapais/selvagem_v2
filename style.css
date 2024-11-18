@@ -49,6 +49,9 @@ body {
   overscroll-behavior-y: contain;
 }
 
+a{
+   color:white; 
+}
 body {
   background-color: var(--bg-color);
   font-family: "AkkuratPro-Light";
@@ -386,15 +389,6 @@ p {
   padding-right: var(--desktopFontSize);
 }
 
-/* Estilo inicial para as divs */
-
-#selvagemSubtitles {
-  display: none;
-}
-
-#outroSelvagem {
-  display: none;
-}
 
 /*Intro*/
 /* Configuração padrão para desktop */
