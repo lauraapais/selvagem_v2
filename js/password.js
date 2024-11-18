@@ -1,4 +1,4 @@
-document.getElementById("submitPassword").addEventListener("click", () => {
+function submitPassword() {
     const passwordInput = document.getElementById("passwordInput").value;
     
     if (passwordInput === "HUMANIDADE") {
@@ -22,5 +22,13 @@ document.getElementById("submitPassword").addEventListener("click", () => {
         }, 400); // Tempo em milissegundos para a transição
     } else {
         alert("Palavra-passe incorreta!");
+    }
+}
+
+document.getElementById("submitPassword").addEventListener("click", submitPassword);
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        submitPassword();
     }
 });
