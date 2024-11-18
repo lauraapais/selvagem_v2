@@ -586,3 +586,11 @@ p {
         grid-column: 1 / 2;
     }
 }
+
+.teaser video {
+    display: none;
+}
+
+.teaser .activeVideo {
+    display: block;
+}

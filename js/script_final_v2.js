@@ -23,14 +23,14 @@ function playCurrentTrack(trackNum) {
     const videos = track.querySelectorAll('video');
     const audios = track.querySelectorAll('audio');
     videos.forEach(video => {
-      video.pause();
+      video.stop();
       video.currentTime = 0; // Reinicia o vídeo
       if (video.dataset.src) {
         video.src = video.dataset.src; // Define a fonte do vídeo
       }
     });
     audios.forEach(audio => {
-      audio.pause();
+      audio.stop();
       audio.currentTime = 0; // Reinicia o áudio
     });
   });

@@ -40,10 +40,10 @@ faixaElements.forEach((faixa) => {
   faixa.setAttribute("disabled", true);
 });
 
-videoElement.style.display = "none";
+//videoElement.style.display = "none";
 legendasVideo.style.display = "none";
 
-document.addEventListener('DOMContentLoaded', function () {
+/*document.addEventListener('DOMContentLoaded', function () {
   var videos = videoElement.querySelectorAll(".video");
 
   videos.forEach(function (video) {
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(video.src + ' has loaded');
     };
   });
-});
+});*/
 
 
 let interactionEnabled = false;
@@ -119,14 +119,14 @@ buttonStart.addEventListener("click", () => {
 
   loadingText.style.display = "block";
 
-  if (!videoElement.src) {
+  /*if (!videoElement.src) {
     videoElement.src = videoElement.getAttribute("data-src");
-  }
+  }*/
   videoElement.load();
 
-  if (!legendasVideo.src) {
+  /*if (!legendasVideo.src) {
     legendasVideo.src = legendasVideo.getAttribute("data-src");
-  }
+  }*/
   legendasVideo.load();
 
   ensureMediaReady(jazzAudio, checkMediaReady);
@@ -151,6 +151,7 @@ function stopCurrentTrack() {
     videoElement.pause();
     videoElement.currentTime = 0; // Reset to start
     videoElement.removeAttribute('style');
+    videoElement.classList.remove("activeVideo");
   }
   if (legendasVideo) {
     legendasVideo.pause();
@@ -180,21 +181,35 @@ function playTrack(trackElement) {
   jazzAudio = currentTrack.querySelector(".jazz");
   poesiaAudio = currentTrack.querySelector(".poesia");
   videoElement = currentTrack.querySelector(".video");
+  videoElement.classList.add("activeVideo");
   legendasVideo = currentTrack.querySelector(".legendas");
   console.log(videoElement);
-  // Set new video sources
-  videoElement.src = videoElement.getAttribute("data-src");
-  legendasVideo.src = legendasVideo.getAttribute("data-src");
+
+  videoElement.play();
+  poesiaAudio.play();
+  legendasVideo.play();
+  jazzAudio.play();
+
+  // Load the first source element
+  /*const videoSource = videoElement.querySelector("source");
+  if (videoSource) {
+    videoElement.src = videoSource.getAttribute("src");
+  }
+
+  const legendasSource = legendasVideo.querySelector("source");
+  if (legendasSource) {
+    legendasVideo.src = legendasSource.getAttribute("src");
+  }*/
 
   // Load media elements
-  videoElement.load();
-  legendasVideo.load();
+  /*videoElement.load();
+  legendasVideo.load();*/
 
   // Ensure all media elements are ready to play
-  ensureMediaReady(jazzAudio, checkMediaReady);
+  /*ensureMediaReady(jazzAudio, checkMediaReady);
   ensureMediaReady(poesiaAudio, checkMediaReady);
   ensureMediaReady(videoElement, checkMediaReady);
-  ensureMediaReady(legendasVideo, checkMediaReady);
+  ensureMediaReady(legendasVideo, checkMediaReady);*/
 
   // Add 'active-track' class to the current track and title
   const trackId = trackElement.id; 
@@ -209,7 +224,6 @@ function playTrack(trackElement) {
     activeTitle.classList.add("active-track");
   }
 }
-
 
 function adjustValue(position, start, end) {
   if (position < start) return 0;
@@ -432,34 +446,3 @@ touchDivs.forEach((div) => {
 });
 
 
-document.querySelectorAll(".faixaNum").forEach((trackButton) => {
-  trackButton.addEventListener("click", (event) => {
-    // Obtemos a track correspondente ao botão clicado
-    const trackId = event.target.getAttribute("data-track");
-
-    // Alterar a faixa atual para a clicada
-    currentTrackIndex = parseInt(trackId.replace("faixa", "")) - 1;
-
-    // Atualiza o visual (remove e aplica a classe de 'active-track')
-    document.querySelectorAll(".faixaNum").forEach((button) => {
-      button.classList.remove("active-track");
-    });
-    event.target.classList.add("active-track");
-
-    // Pausar qualquer reprodução em andamento e resetar
-    stopAllTracks();
-
-    // Reproduzir a track correspondente
-    playCurrentTrack();
-  });
-});
-
-// Função para parar todas as faixas
-function stopAllTracks() {
-  document.querySelectorAll(".mediaTrack").forEach((track) => {
-    track.querySelectorAll("audio, video").forEach((media) => {
-      media.pause();
-      media.currentTime = 0;
-    });
-  });
-}
