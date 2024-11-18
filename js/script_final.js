@@ -43,16 +43,16 @@ faixaElements.forEach((faixa) => {
 videoElement.style.display = "none";
 legendasVideo.style.display = "none";
 
-document.addEventListener('DOMContentLoaded', function() {
-    var videos = videoElement.querySelectorAll(".video");
-    
-    videos.forEach(function(video) {
-        video.setAttribute('preload', 'auto');
-        
-        video.onloadeddata = function() {
-            console.log(video.src + ' has loaded');
-        };
-    });
+document.addEventListener('DOMContentLoaded', function () {
+  var videos = videoElement.querySelectorAll(".video");
+
+  videos.forEach(function (video) {
+    video.setAttribute('preload', 'auto');
+
+    video.onloadeddata = function () {
+      console.log(video.src + ' has loaded');
+    };
+  });
 });
 
 
@@ -136,64 +136,70 @@ buttonStart.addEventListener("click", () => {
 });
 
 function stopCurrentTrack() {
+  // Function to stop and clear current media elements
   if (jazzAudio) {
     jazzAudio.pause();
-    jazzAudio.currentTime = 0;
+    jazzAudio.currentTime = 0; // Reset to start
+    jazzAudio.removeAttribute('style');
   }
   if (poesiaAudio) {
     poesiaAudio.pause();
-    poesiaAudio.currentTime = 0;
+    poesiaAudio.currentTime = 0; // Reset to start
+    poesiaAudio.removeAttribute('style');
   }
   if (videoElement) {
     videoElement.pause();
-    videoElement.currentTime = 0;
-    videoElement.src = "";
-    videoElement.load();
+    videoElement.currentTime = 0; // Reset to start
+    videoElement.removeAttribute('style');
   }
   if (legendasVideo) {
     legendasVideo.pause();
-    legendasVideo.currentTime = 0;
-    legendasVideo.src = "";
-    legendasVideo.load();
+    legendasVideo.currentTime = 0; // Reset to start
+    legendasVideo.removeAttribute('style');
   }
 
-  videoElement.style.display = "none";
-  legendasVideo.style.display = "none";
+  // Reset media elements
+  jazzAudio = null;
+  poesiaAudio = null;
+  videoElement = null;
+  legendasVideo = null;
 }
 
 function playTrack(trackElement) {
-  stopCurrentTrack();
+  stopCurrentTrack(); // Ensure all current media elements are stopped and reset
 
   loadingText.style.display = "block";
   currentTrack = trackElement;
 
-  // Remove a classe 'active-track' de todas as faixas e títulos
+  // Remove 'active-track' class from all track elements
   faixaElements.forEach((faixa) => faixa.classList.remove("active-track"));
   const faixaTitles = document.querySelectorAll(".faixaTitle .faixa");
   faixaTitles.forEach((faixa) => faixa.classList.remove("active-track"));
 
-
+  // Select new media elements
   jazzAudio = currentTrack.querySelector(".jazz");
   poesiaAudio = currentTrack.querySelector(".poesia");
   videoElement = currentTrack.querySelector(".video");
   legendasVideo = currentTrack.querySelector(".legendas");
-
+  console.log(videoElement);
+  // Set new video sources
   videoElement.src = videoElement.getAttribute("data-src");
-  videoElement.load();
-
   legendasVideo.src = legendasVideo.getAttribute("data-src");
+
+  // Load media elements
+  videoElement.load();
   legendasVideo.load();
 
+  // Ensure all media elements are ready to play
   ensureMediaReady(jazzAudio, checkMediaReady);
   ensureMediaReady(poesiaAudio, checkMediaReady);
   ensureMediaReady(videoElement, checkMediaReady);
   ensureMediaReady(legendasVideo, checkMediaReady);
 
+  // Add 'active-track' class to the current track and title
   const trackId = trackElement.id; 
   const activeFaixa = document.querySelector(`[data-track="${trackId}"]`);
-  const activeTitle = document.querySelector(
-    `.faixaTitle .faixa[data-track="${trackId}"]`
-  );
+  const activeTitle = document.querySelector(`.faixaTitle .faixa[data-track="${trackId}"]`);
 
   if (activeFaixa) {
     activeFaixa.classList.add("active-track");
@@ -202,7 +208,8 @@ function playTrack(trackElement) {
   if (activeTitle) {
     activeTitle.classList.add("active-track");
   }
- }
+}
+
 
 function adjustValue(position, start, end) {
   if (position < start) return 0;
@@ -423,3 +430,43 @@ touchDivs.forEach((div) => {
   div.addEventListener("touchstart", activateDiv);
   div.addEventListener("touchend", deactivateDiv);
 });
+
+
+
+/*Adicional*/
+function stopCurrentTrack() {
+  if (jazzAudio) {
+    jazzAudio.pause();
+    jazzAudio.src = ""; // Libera o recurso
+    jazzAudio.removeAttribute('style');
+  }
+  if (poesiaAudio) {
+    poesiaAudio.pause();
+    poesiaAudio.src = ""; // Libera o recurso
+    poesiaAudio.removeAttribute('style');
+  }
+  if (videoElement) {
+    videoElement.pause();
+    videoElement.src = ""; // Libera o recurso
+    videoElement.removeAttribute('style');
+
+  }
+  if (legendasVideo) {
+    legendasVideo.pause();
+    legendasVideo.src = ""; // Libera o recurso
+    legendasVideo.removeAttribute('style');
+
+  }
+}
+function loadVideo(videoElement, src) {
+  videoElement.pause();
+  videoElement.src = src;
+  videoElement.load();
+  videoElement.oncanplay = () => {
+    videoElement.play();
+  };
+  videoElement.onerror = (e) => {
+    console.error("Error loading video:", e);
+  };
+}
+

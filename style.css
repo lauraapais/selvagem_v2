@@ -399,17 +399,6 @@ p {
 
 
 /* Estilo inicial para as divs */
-#introSelvagem {
-    display: block;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-}
-
-#selvagemProgram {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
 
 #selvagemSubtitles {
     display: none;
@@ -435,7 +424,12 @@ p {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
+
+
 
 #buttonStart p {
     text-decoration: underline;
@@ -455,6 +449,20 @@ p {
 
 .faixaTitle .faixaNum:hover {
     font-weight: bold;
+}
+
+
+/* Define os estados de visibilidade */
+.hidden {
+    opacity: 0;
+    visibility: hidden; /* Garante que o elemento não fique clicável */
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 /*Subtitles*/
