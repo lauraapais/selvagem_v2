@@ -43,10 +43,10 @@ let pTrack = 1;
 let interactionEnabled = false;
 
 function setInitialProgress() {
-  jazzAudio.volume = 0.7;
-  poesiaAudio.volume = 0.5;
+  jazzAudio.volume = 1.0;
+  poesiaAudio.volume = 1.0;
   videoElement.style.opacity = 1.0;
-  legendasVideo.style.opacity = 0.3;
+  legendasVideo.style.opacity = 1.0;
 }
 
 // Adicionando o cursor customizado
@@ -149,20 +149,15 @@ function loadGroup(groupNumber) {
 
 // Add ended event listener to video to load the next group
 video.addEventListener("ended", function onVideoEnd() {
-  // Apply fade-out class to video
   video.classList.add("fade-out");
 
-  // Wait for the transition to finish
   video.addEventListener("transitionend", function onTransitionEnd() {
-    // Remove fade-out class from video
     video.classList.remove("fade-out");
 
-    // Logic to load the next group or perform actions
     if (groupNumber < 10) {
       let nextGroup = groupNumber + 1;
       loadGroup(nextGroup);
 
-      // Apply fade-in class to video
       video.classList.add("fade-in");
 
       video.addEventListener("transitionend", function onFadeInEnd() {
