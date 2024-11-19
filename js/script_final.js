@@ -395,3 +395,20 @@ touchDivs.forEach((div) => {
   div.addEventListener("touchstart", activateDiv);
   div.addEventListener("touchend", deactivateDiv);
 });
+
+
+document.querySelectorAll('.divRight div, .divLeft div, .divTop div, .divBottom div').forEach(div => {
+  div.addEventListener('mouseover', () => {
+    // Remove "visited" de outros irmãos
+    div.parentElement.querySelectorAll('div').forEach(sibling => sibling.classList.remove('visited'));
+    // Adiciona "visited" ao elemento atual
+    div.classList.add('visited');
+  });
+
+  div.addEventListener('click', () => {
+    // Remove "active" de outros irmãos
+    div.parentElement.querySelectorAll('div').forEach(sibling => sibling.classList.remove('active'));
+    // Adiciona "active" ao elemento atual
+    div.classList.add('active');
+  });
+});

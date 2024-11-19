@@ -148,19 +148,19 @@ main {
   transition: all 0.2s ease-in-out;
 }
 
-.divRight div:hover,
-.divLeft div:hover,
 .divRight div.active,
-.divLeft div.active {
+.divLeft div.active,
+.divRight div.visited,
+.divLeft div.visited {
   width: 100%;
   border-top: 3px solid #ed1c24;
   transition: all 0.2s ease-in-out;
 }
 
-.divTop div:hover,
-.divBottom div:hover,
 .divTop div.active,
-.divBottom div.active {
+.divBottom div.active,
+.divTop div.visited,
+.divBottom div.visited {
   height: 100%;
   border-right: 3px solid #ed1c24;
   transition: all 0.2s ease-in-out;
