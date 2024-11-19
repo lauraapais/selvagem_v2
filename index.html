@@ -30,9 +30,11 @@
                 </div>
             </div>
         </div>
-
+        
         <!--INTRO-->
         <div class="introSelvagem hidden" id="introSelvagem">
+             <!--load-->
+
             <div class="teaser">
                 <video class="video" autoplay loop muted>
                     <source src="data/teaser_crop.mp4" type="video/mp4">
@@ -75,6 +77,11 @@
                 </div>
                 <div class="col-10-desktop">
                     <p>Luz</p>
+
+                    <!--<div id="loading" class="activeLoading">
+                        <p>Loading...</p>       
+                         </div>-->
+
                     <div id="buttonStart" class="hover-link">
                         <p>Começa a</p>
                         <p class="textAlignRight">experiência</p>
@@ -88,7 +95,6 @@
             <div class="teaser">
                 <div>
                     <div>
-                        <!--<div id="loadingText" class="loading-text" style="display: none;">Loading...</div>-->
 
                         <div class="interation hidden divTop slider">
                             <div></div>
@@ -143,10 +149,10 @@
 
                         <!----------------------------------------Track 1---------------------------------------->
                         <div id="faixa1" class="track1 mediaTrack ">
-                            <video preload="auto" id="video" class="video"></video>
+                            <video preload="auto" muted id="video" class="video"></video>
                             <video preload="auto" muted id="legendas" class="legendas"></video>
-                            <audio preload="auto" id="poesia" class="poesia"> </audio>
-                            <audio preload="auto" id="jazz" class="jazz"></audio>
+                            <audio preload="auto" muted id="poesia" class="poesia"> </audio>
+                            <audio preload="auto" muted id="jazz" class="jazz"></audio>
                         </div>
                     </div>
                     <div class="grid gridProgram faixas">
@@ -187,11 +193,6 @@
 
         <!--OUTRO-->
         <div class="outroSelvagem hidden" id="outroSelvagem">
-            <div class="teaser">
-                <video autoplay loop muted>
-                    <source src="data/teaser_crop.mp4" type="video/mp4">
-                </video>
-            </div>
             <div class="grid gridOutro">
                 <div>
                     <p>Vídeo-álbum<br>inspirado na<br>obra<br>

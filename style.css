@@ -521,6 +521,15 @@ input::placeholder {
   font-weight: bold;
 }
 
+#loading{
+  position: absolute;
+  bottom: 0;
+}
+
+.activeLoading{
+  display: block;
+}
+
 /* Ajustes para dispositivos móveis */
 @media (max-width: 768px) {
   p {
