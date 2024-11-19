@@ -526,6 +526,8 @@ input::placeholder {
 }
 
 
+.fade-out { opacity: 0; transition: opacity 1s ease-out; } .fade-in { opacity: 1; transition: opacity 1s ease-in; }
+
 /* Ajustes para dispositivos móveis */
 @media (max-width: 768px) {
   p {

@@ -123,7 +123,7 @@ function loadGroup(groupNumber) {
   
   document.getElementById('loading').style.display = 'block';
 
-  
+
   faixaElements[pTrack].classList.remove("active-track");
   faixaTitles[pTrack].classList.remove("active-track");
   faixaElements[groupNumber - 1].classList.add("active-track");
@@ -147,22 +147,55 @@ function loadGroup(groupNumber) {
     `data/track/${groupNumber}/Luz${groupNumber}_instrumental.wav`
   );
 
-  // Add ended event listener to video to load the next group
-  video.addEventListener("ended", function onVideoEnd() {
+// Add ended event listener to video to load the next group
+video.addEventListener("ended", function onVideoEnd() {
+  // Apply fade-out class to video
+  video.classList.add("fade-out");
+
+  // Wait for the transition to finish
+  video.addEventListener("transitionend", function onTransitionEnd() {
+    // Remove fade-out class from video
+    video.classList.remove("fade-out");
+
+    // Logic to load the next group or perform actions
     if (groupNumber < 10) {
       let nextGroup = groupNumber + 1;
       loadGroup(nextGroup);
+
+      // Apply fade-in class to video
+      video.classList.add("fade-in");
+
+      video.addEventListener("transitionend", function onFadeInEnd() {
+        video.classList.remove("fade-in");
+      }, { once: true });
+
     } else {
+      selvagemProgram.classList.add("fade-out");
+      
       pauseCurrentTrack();
       setVisibility(selvagemProgram, true);
       setVisibility(outroSelvagem, false);
-    }
-    video.removeEventListener("ended", onVideoEnd); // Remove the event listener to avoid stacking
-  });
 
-  // Trigger a check in case media are already loaded
-  checkCanPlayThrough();
-  pTrack = groupNumber - 1;
+      setTimeout(() => {
+        selvagemProgram.classList.remove("fade-out");
+        selvagemProgram.classList.add("fade-in");
+
+        selvagemProgram.addEventListener("transitionend", function onSelvagemProgramFadeInEnd() {
+          selvagemProgram.classList.remove("fade-in");
+        }, { once: true });
+      }, 100);
+    }
+  }, { once: true });
+
+  video.removeEventListener("ended", onVideoEnd);
+});
+
+checkCanPlayThrough();
+pTrack = groupNumber - 1;
+
+checkCanPlayThrough();
+pTrack = groupNumber - 1;
+
 }
 
 function adjustValue(position, start, end) {
