@@ -238,9 +238,6 @@ main {
   right: 0;
 }
 
-.track .legenda {
-  mix-blend-mode: exclusion;
-}
 
 .type {
   padding: 30px;
@@ -403,12 +400,17 @@ p {
 
 .teaser video {
   width: 100%;
-  height: calc(var(--vh, 1h) * 100);
+  height: 100%;
   object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
 }
+
+.teaser .legendas {
+  object-fit: scale-down!important;
+}
+
 
 #buttonStart p {
   text-decoration: underline;
