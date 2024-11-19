@@ -70,7 +70,6 @@ buttonStart.addEventListener("click", () => {
     faixa.removeAttribute("disabled");
   });
 
-  //loadingText.style.display = "block";
 
   loadGroup(1);
 });
@@ -80,88 +79,10 @@ let legendas = document.getElementById("legendas");
 let poesia = document.getElementById("poesia");
 let jazz = document.getElementById("jazz");
 
-document.addEventListener("DOMContentLoaded", function () {
-  let currentIndex = 1;
-  const totalGroups = 10;
-
-  function preloadNext() {
-    console.log("HEREEEE", currentIndex);
-    if (currentIndex > totalGroups) {
-      video.setAttribute("src", "");
-      legendas.setAttribute("src", "");
-      poesia.setAttribute("src", "");
-      jazz.setAttribute("src", "");
-
-
-      video.removeEventListener("canplaythrough", checkPreload);
-      legendas.removeEventListener("canplaythrough", checkPreload);
-      poesia.removeEventListener("canplaythrough", checkPreload);
-      jazz.removeEventListener("canplaythrough", checkPreload);
-      
-      video.addEventListener("canplaythrough", checkCanPlayThrough);
-      legendas.addEventListener("canplaythrough", checkCanPlayThrough);
-      poesia.addEventListener("canplaythrough", checkCanPlayThrough);
-      jazz.addEventListener("canplaythrough", checkCanPlayThrough);
-
-      video.muted = false;
-      poesia.muted = false;
-      jazz.muted = false;
-
-      // FAZ AQUI
-      // METE UM DIV NA FRENTE A DIZER LOADING EXPERIENCE OR SOME SHIT
-      // E QUANDO CHEGAR AQUI REMOVES O DIV OU REMOVES A CLASS
-      // ESTE IF SO E CHAMADO QUANDO TERMINA DE DAR LOAD A TUDO
-      //meto a aparecer onde??
-      // EM CIMA DE TUDO I GUESS
-      // AQUI REMOVES O DIVV ok
-      // GL SOLDIRE
-      return; // Stop when all groups are preloaded
-    }
-
-    // Set attributes for the current group
-    video.setAttribute(
-      "src",
-      `data/track/${currentIndex}/Luz${currentIndex}_video.mp4`
-    );
-    legendas.setAttribute(
-      "src",
-      `data/track/${currentIndex}/Luz${currentIndex}_legendas.mp4`
-    );
-    poesia.setAttribute(
-      "src",
-      `data/track/${currentIndex}/Luz${currentIndex}_voz.wav`
-    );
-    jazz.setAttribute(
-      "src",
-      `data/track/${currentIndex}/Luz${currentIndex}_instrumental.wav`
-    );
-
-    video.removeEventListener("canplaythrough", checkPreload);
-    legendas.removeEventListener("canplaythrough", checkPreload);
-    poesia.removeEventListener("canplaythrough", checkPreload);
-    jazz.removeEventListener("canplaythrough", checkPreload);
-
-    // Preload the current group and move to the next one once the video can play through
-    video.addEventListener("canplaythrough", checkPreload);
-    legendas.addEventListener("canplaythrough", checkPreload);
-    poesia.addEventListener("canplaythrough", checkPreload);
-    jazz.addEventListener("canplaythrough", checkPreload);
-  }
-
-  function checkPreload() {
-    if (
-      video.readyState >= 3 &&
-      legendas.readyState >= 3 &&
-      poesia.readyState >= 3 &&
-      jazz.readyState >= 3
-    ) {
-      currentIndex++;
-      preloadNext();
-    }
-  }
-
-  preloadNext(); // Start preloading from the first group
-});
+video.addEventListener("canplaythrough", checkCanPlayThrough);
+legendas.addEventListener("canplaythrough", checkCanPlayThrough);
+poesia.addEventListener("canplaythrough", checkCanPlayThrough);
+jazz.addEventListener("canplaythrough", checkCanPlayThrough);
 
 function checkCanPlayThrough() {
   if (
@@ -174,7 +95,7 @@ function checkCanPlayThrough() {
     legendas.play();
     poesia.play();
     jazz.play();
-  }
+    document.getElementById('loading').style.display = 'none';  }
 }
 
 function pauseCurrentTrack() {
@@ -198,8 +119,11 @@ function pauseCurrentTrack() {
 
 function loadGroup(groupNumber) {
   // Pause and reset the current media
-  pauseCurrentTrack();
+  pauseCurrentTrack()
+  
+  document.getElementById('loading').style.display = 'block';
 
+  
   faixaElements[pTrack].classList.remove("active-track");
   faixaTitles[pTrack].classList.remove("active-track");
   faixaElements[groupNumber - 1].classList.add("active-track");
@@ -223,35 +147,18 @@ function loadGroup(groupNumber) {
     `data/track/${groupNumber}/Luz${groupNumber}_instrumental.wav`
   );
 
-  function pauseEndTrack() {
-    video.muted = true;
-    poesia.muted = true;
-    jazz.muted = true;
-  }
-  
+  // Add ended event listener to video to load the next group
   video.addEventListener("ended", function onVideoEnd() {
     if (groupNumber < 10) {
       let nextGroup = groupNumber + 1;
       loadGroup(nextGroup);
     } else {
-      pauseEndTrack();
-      
-      // Adicionar transição de opacidade
-      selvagemProgram.style.transition = "opacity 0.4s";
-      outroSelvagem.style.transition = "opacity 0.4s";
-      
-      // Iniciar transição de opacidade
-      selvagemProgram.style.opacity = "0";
-      outroSelvagem.style.opacity = "1";
-  
-      setTimeout(() => {
-        setVisibility(selvagemProgram, true);
-        setVisibility(outroSelvagem, false);
-      }, 400); // Tempo da transição deve corresponder ao tempo do CSS
+      pauseCurrentTrack();
+      setVisibility(selvagemProgram, true);
+      setVisibility(outroSelvagem, false);
     }
     video.removeEventListener("ended", onVideoEnd); // Remove the event listener to avoid stacking
   });
-
 
   // Trigger a check in case media are already loaded
   checkCanPlayThrough();
