@@ -301,7 +301,7 @@ main {
 
   .faixas {
     display: flex;
-    width: calc(100% - 100px);
+    width: calc(100%);
     position: absolute;
     bottom: 70px;
     z-index: 50;
@@ -525,7 +525,21 @@ input::placeholder {
   display:none
 }
 
+#activediv{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(25, 25, 25);
+  position: absolute;
+  z-index: 50;
+  opacity: 50%;
+}
 
+#faixaInteration1.hidden, #faixaInteration2.hidden {
+  display: none;
+}
+#faixaInteration1.active, #faixaInteration2.active {
+  display: block;
+}
 .fade-out { opacity: 0; transition: opacity 1s ease-out; } .fade-in { opacity: 1; transition: opacity 1s ease-in; }
 
 /* Ajustes para dispositivos móveis */
@@ -584,6 +598,12 @@ input::placeholder {
   .divRight,
   .divLeft {
     grid-template-rows: repeat(7, 1fr);
+  }
+
+  
+
+  .faixaTitle{
+    grid-column: 3 / 5;
   }
 
   /* Legendas */

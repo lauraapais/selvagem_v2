@@ -340,12 +340,19 @@ hoverLinks.forEach((link) => {
 });
 
 const interactionDivs = document.querySelectorAll(".interation");
+const faixaInteration1 = document.getElementById("faixaInteration1");
+const faixaInteration2 = document.getElementById("faixaInteration2");
 
 function showInteractions() {
   interactionDivs.forEach((div) => {
     div.classList.add("active");
     div.classList.remove("hidden");
   });
+
+  faixaInteration1.classList.add("active");
+  faixaInteration1.classList.remove("hidden");
+  faixaInteration2.classList.add("active");
+  faixaInteration2.classList.remove("hidden");
 }
 
 function hideInteractions() {
@@ -353,7 +360,28 @@ function hideInteractions() {
     div.classList.add("hidden");
     div.classList.remove("active");
   });
+
+  faixaInteration1.classList.add("hidden");
+  faixaInteration1.classList.remove("active");
+  faixaInteration2.classList.add("hidden");
+  faixaInteration2.classList.remove("active");
 }
+
+// Ensure faixaInteration is always active
+faixaInteration1.classList.add("active");
+faixaInteration1.classList.remove("hidden");
+faixaInteration2.classList.add("active");
+faixaInteration2.classList.remove("hidden");
+
+// Add event listener for window resize to ensure elements remain visible
+window.addEventListener('resize', () => {
+  faixaInteration1.classList.add("active");
+  faixaInteration1.classList.remove("hidden");
+  faixaInteration2.classList.add("active");
+  faixaInteration2.classList.remove("hidden");
+});
+
+
 
 let inactivityTimer;
 
