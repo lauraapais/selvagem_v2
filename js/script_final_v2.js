@@ -1,72 +1,42 @@
-const buttonStart = document.getElementById("buttonStart");
 const introSelvagem = document.getElementById("introSelvagem");
 const selvagemProgram = document.getElementById("selvagemProgram");
-
-buttonStart.addEventListener("click", () => {
-  introSelvagem.style.opacity = "0";
-
-  setTimeout(() => {
-    introSelvagem.style.display = "none";
-    selvagemProgram.style.display = "block";
-    setVisibility(introSelvagem, true);
-    setVisibility(selvagemProgram, false);
-    setTimeout(() => {
-      selvagemProgram.style.opacity = "1";
-    }, 50);
-  }, 400);
-});
-
-function setVisibility(item, status) {
-  if (status) {
-    item.classList.add("hidden");
-    item.classList.remove("visible");
-  } else {
-    item.classList.remove("hidden");
-    item.classList.add("visible");
-  }
-}
-
-let currentTrack = document.querySelector(".track1");
-
-let jazzAudio = currentTrack.querySelector(".jazz");
-let poesiaAudio = currentTrack.querySelector(".poesia");
-let videoElement = currentTrack.querySelector(".video");
-let legendasVideo = currentTrack.querySelector(".legendas");
-
-const loadingText = document.getElementById("loadingText");
-
-const faixaElements = document.querySelectorAll(".faixa");
-faixaElements.forEach((faixa) => {
-  faixa.setAttribute("disabled", true);
-});
-
-//videoElement.style.display = "none";
-//legendasVideo.style.display = "none";
-
-/*document.addEventListener('DOMContentLoaded', function () {
-  var videos = videoElement.querySelectorAll(".video");
-
-  videos.forEach(function (video) {
-    video.setAttribute('preload', 'auto');
-
-    video.onloadeddata = function () {
-      console.log(video.src + ' has loaded');
-    };
-  });
-});*/
-
+const submitPasswordButton = document.getElementById("submitPassword");
+const passwordInput = document.getElementById("passwordInput");
+const cursor = document.getElementById("cursor");
+const trackPlaying = document.getElementById("trackPlaying");
 
 let interactionEnabled = false;
 
-function setInitialProgress() {
-  jazzAudio.volume = 0.7;
-  poesiaAudio.volume = 0.5;
-  videoElement.style.opacity = 1.0;
-  legendasVideo.style.opacity = 0.3;
+function submitPassword() {
+  const password = passwordInput.value;
+  
+  if (password === "HUMANIDADE") {
+    introSelvagem.style.transition = "opacity 0.4s";
+    selvagemProgram.style.transition = "opacity 0.4s";
+
+    introSelvagem.style.opacity = "0";
+    selvagemProgram.style.opacity = "1";
+
+    setTimeout(() => {
+      introSelvagem.classList.remove("visible");
+      introSelvagem.classList.add("hidden");
+      selvagemProgram.classList.remove("hidden");
+      selvagemProgram.classList.add("visible");
+    }, 400);
+
+    interactionEnabled = true;
+  } else {
+    alert("Palavra-passe incorreta!");
+  }
 }
 
-// Adicionando o cursor customizado
-const cursor = document.getElementById("cursor");
+submitPasswordButton.addEventListener("click", submitPassword);
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    submitPassword();
+  }
+});
+
 document.addEventListener("mousemove", (e) => {
   const mouseX = e.clientX;
   const mouseY = e.clientY;
@@ -79,148 +49,149 @@ function adjustCursorSize(value) {
   cursor.style.height = `${2 + value * 4}em`;
 }
 
-function ensureMediaReady(mediaElement, callback) {
-  if (mediaElement.readyState >= 3) {
-    callback();
-  } else {
-    mediaElement.addEventListener("canplaythrough", callback, { once: true });
-  }
+let currentTrack = document.querySelector(".track1");
+let jazzAudio = currentTrack.querySelector(".jazz");
+let poesiaAudio = currentTrack.querySelector(".poesia");
+let videoElement = currentTrack.querySelector(".video");
+let legendasVideo = currentTrack.querySelector(".legendas");
+
+const faixaElements = document.querySelectorAll(".faixaNum"); // Certifique-se de usar a classe correta.
+const faixaTitles = document.querySelectorAll(".faixaTitle .faixa"); // Ajuste se necessário.
+
+let pTrack = 1;
+
+function setInitialProgress() {
+  jazzAudio.volume = 1.0;
+  poesiaAudio.volume = 1.0;
+  videoElement.style.opacity = 1.0;
+  legendasVideo.style.opacity = 1.0;
 }
 
-function checkMediaReady() {
-  if (
-    jazzAudio.readyState >= 3 &&
-    poesiaAudio.readyState >= 3 &&
-    videoElement.readyState >= 3 &&
-    legendasVideo.readyState >= 3
-  ) {
-    loadingText.style.display = "none";
-
-    videoElement.play();
-    videoElement.style.display = "block";
-    videoElement.style.opacity = "1";
-    legendasVideo.play();
-    legendasVideo.style.display = "block";
-    legendasVideo.style.opacity = "1";
-
-    jazzAudio.play();
-    poesiaAudio.play();
-
-    setInitialProgress();
-  }
-}
-
-buttonStart.addEventListener("click", () => {
+document.getElementById("submitPassword").addEventListener("click", () => {
   interactionEnabled = true;
 
   faixaElements.forEach((faixa) => {
     faixa.removeAttribute("disabled");
   });
 
-  loadingText.style.display = "block";
-
-  /*if (!videoElement.src) {
-    videoElement.src = videoElement.getAttribute("data-src");
-  }*/
-  videoElement.load();
-
-  /*if (!legendasVideo.src) {
-    legendasVideo.src = legendasVideo.getAttribute("data-src");
-  }*/
-  legendasVideo.load();
-
-  ensureMediaReady(jazzAudio, checkMediaReady);
-  ensureMediaReady(poesiaAudio, checkMediaReady);
-  ensureMediaReady(videoElement, checkMediaReady);
-  ensureMediaReady(legendasVideo, checkMediaReady);
+  loadGroup(1);
 });
 
-function stopCurrentTrack() {
-  // Function to stop and clear current media elements
-  if (jazzAudio) {
-    jazzAudio.pause();
-    jazzAudio.currentTime = 0; // Reset to start
-    jazzAudio.removeAttribute('style');
-  }
-  if (poesiaAudio) {
-    poesiaAudio.pause();
-    poesiaAudio.currentTime = 0; // Reset to start
-    poesiaAudio.removeAttribute('style');
-  }
-  if (videoElement) {
-    videoElement.pause();
-    videoElement.currentTime = 0; // Reset to start
-    videoElement.removeAttribute('style');
-    videoElement.classList.remove("activeVideo");
-  }
-  if (legendasVideo) {
-    legendasVideo.pause();
-    legendasVideo.currentTime = 0; // Reset to start
-    legendasVideo.removeAttribute('style');
-  }
 
-  // Reset media elements
-  jazzAudio = null;
-  poesiaAudio = null;
-  videoElement = null;
-  legendasVideo = null;
+let video = document.getElementById("video");
+let legendas = document.getElementById("legendas");
+let poesia = document.getElementById("poesia");
+let jazz = document.getElementById("jazz");
+
+video.addEventListener("canplaythrough", checkCanPlayThrough);
+legendas.addEventListener("canplaythrough", checkCanPlayThrough);
+poesia.addEventListener("canplaythrough", checkCanPlayThrough);
+jazz.addEventListener("canplaythrough", checkCanPlayThrough);
+
+function checkCanPlayThrough() {
+  if (
+    video.readyState >= 3 &&
+    legendas.readyState >= 3 &&
+    poesia.readyState >= 3 &&
+    jazz.readyState >= 3
+  ) {
+    video.play();
+    legendas.play();
+    poesia.play();
+    jazz.play();
+    document.getElementById('loading').style.display = 'none';  }
 }
 
-function playTrack(trackElement) {
-  stopCurrentTrack(); // Ensure all current media elements are stopped and reset
-
-  loadingText.style.display = "block";
-  currentTrack = trackElement;
-
-  // Remove 'active-track' class from all track elements
-  faixaElements.forEach((faixa) => faixa.classList.remove("active-track"));
-  const faixaTitles = document.querySelectorAll(".faixaTitle .faixa");
-  faixaTitles.forEach((faixa) => faixa.classList.remove("active-track"));
-
-  // Select new media elements
-  jazzAudio = currentTrack.querySelector(".jazz");
-  poesiaAudio = currentTrack.querySelector(".poesia");
-  videoElement = currentTrack.querySelector(".video");
-  videoElement.classList.add("activeVideo");
-  legendasVideo = currentTrack.querySelector(".legendas");
-  console.log(videoElement);
-
-  videoElement.play();
-
-  // Load the first source element
-  /*const videoSource = videoElement.querySelector("source");
-  if (videoSource) {
-    videoElement.src = videoSource.getAttribute("src");
+function pauseCurrentTrack() {
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
   }
-
-  const legendasSource = legendasVideo.querySelector("source");
-  if (legendasSource) {
-    legendasVideo.src = legendasSource.getAttribute("src");
-  }*/
-
-  // Load media elements
-  /*videoElement.load();
-  legendasVideo.load();*/
-
-  // Ensure all media elements are ready to play
-  /*ensureMediaReady(jazzAudio, checkMediaReady);
-  ensureMediaReady(poesiaAudio, checkMediaReady);
-  ensureMediaReady(videoElement, checkMediaReady);
-  ensureMediaReady(legendasVideo, checkMediaReady);*/
-
-  // Add 'active-track' class to the current track and title
-  const trackId = trackElement.id; 
-  const activeFaixa = document.querySelector(`[data-track="${trackId}"]`);
-  const activeTitle = document.querySelector(`.faixaTitle .faixa[data-track="${trackId}"]`);
-
-  if (activeFaixa) {
-    activeFaixa.classList.add("active-track");
+  if (legendas) {
+    legendas.pause();
+    legendas.currentTime = 0;
   }
-
-  if (activeTitle) {
-    activeTitle.classList.add("active-track");
+  if (poesia) {
+    poesia.pause();
+    poesia.currentTime = 0;
+  }
+  if (jazz) {
+    jazz.pause();
+    jazz.currentTime = 0;
   }
 }
+
+function loadGroup(groupNumber) {
+  // Pause and reset the current media
+  pauseCurrentTrack()
+  
+  document.getElementById('loading').style.display = 'block';
+
+  const trackNames = ["Luz", "Fim de Tarde", "Instantâneo", "Dependência / Correntes Marítimas", "Periferia", "O Cão Sozinho", "Canção dos Brancos Negros", "Altura", "Humanidade", "Arqueologia"];
+  document.getElementById("trackNumberPlaying").textContent = groupNumber.toString().padStart(2, '0');
+  document.getElementById("trackPlaying").textContent = trackNames[groupNumber - 1];
+
+  // Set new sources for the selected group
+  video.setAttribute(
+    "src",
+    `data/track/${groupNumber}/Luz${groupNumber}_video.mp4`
+  );
+  legendas.setAttribute(
+    "src",
+    `data/track/${groupNumber}/Luz${groupNumber}_legendas.mp4`
+  );
+  poesia.setAttribute(
+    "src",
+    `data/track/${groupNumber}/Luz${groupNumber}_voz.wav`
+  );
+  jazz.setAttribute(
+    "src",
+    `data/track/${groupNumber}/Luz${groupNumber}_instrumental.wav`
+  );
+
+  video.addEventListener("ended", function onVideoEnd() {
+    video.classList.add("fade-out");
+
+    video.addEventListener("transitionend", function onTransitionEnd() {
+      video.classList.remove("fade-out");
+
+      if (groupNumber < 10) {
+        let nextGroup = groupNumber + 1;
+        loadGroup(nextGroup);
+
+        video.classList.add("fade-in");
+
+        video.addEventListener("transitionend", function onFadeInEnd() {
+          video.classList.remove("fade-in");
+        }, { once: true });
+
+      } else {
+        selvagemProgram.classList.add("fade-out");
+
+        pauseCurrentTrack();
+        setVisibility(selvagemProgram, true);
+        setVisibility(outroSelvagem, false);
+
+        setTimeout(() => {
+          selvagemProgram.classList.remove("fade-out");
+          selvagemProgram.classList.add("fade-in");
+
+          selvagemProgram.addEventListener("transitionend", function onSelvagemProgramFadeInEnd() {
+            selvagemProgram.classList.remove("fade-in");
+          }, { once: true });
+        }, 100);
+      }
+    }, { once: true });
+
+    video.removeEventListener("ended", onVideoEnd);
+  });
+
+  checkCanPlayThrough();
+  pTrack = groupNumber - 1;
+}
+
+
+
 
 function adjustValue(position, start, end) {
   if (position < start) return 0;
@@ -263,7 +234,7 @@ divTop.addEventListener("mousemove", (e) => {
 
   const rect = divTop.getBoundingClientRect();
   const volume = adjustValue(e.clientX, rect.left + 50, rect.right - 50);
-  jazzAudio.volume = volume;
+  jazz.volume = volume;
   /* updateProgressBar(progressJazz, volume, true);*/
 
   cursor.style.width = `${2 + volume * 4}em`;
@@ -277,7 +248,7 @@ divTop.addEventListener("touchmove", (e) => {
     e,
     divTop,
     (volume) => {
-      jazzAudio.volume = volume;
+      jazz.volume = volume;
       updateProgressBar(progressJazz, volume, true);
     },
     true
@@ -289,8 +260,7 @@ divRight.addEventListener("mousemove", (e) => {
 
   const rect = divRight.getBoundingClientRect();
   const opacity = 1 - adjustValue(e.clientY, rect.top + 50, rect.bottom - 50);
-  legendasVideo.style.opacity = opacity;
-  /* updateProgressBar(progressLegendas, opacity, false);*/
+  legendas.style.opacity = opacity;
 
   cursor.style.width = `${2 + opacity * 4}em`;
   cursor.style.height = `${2 + opacity * 4}em`;
@@ -303,8 +273,7 @@ divRight.addEventListener("touchmove", (e) => {
     e,
     divRight,
     (opacity) => {
-      legendasVideo.style.opacity = 1 - opacity;
-      /* updateProgressBar(progressLegendas, opacity, false); */
+      legendas.style.opacity = 1 - opacity;
     },
     false
   );
@@ -315,8 +284,7 @@ divBottom.addEventListener("mousemove", (e) => {
 
   const rect = divBottom.getBoundingClientRect();
   const volume = adjustValue(e.clientX, rect.left + 50, rect.right - 50);
-  poesiaAudio.volume = volume;
-  /* updateProgressBar(progressPoesia, volume, true); */
+  poesia.volume = volume;
 
   cursor.style.width = `${2 + volume * 4}em`;
   cursor.style.height = `${2 + volume * 4}em`;
@@ -329,8 +297,7 @@ divBottom.addEventListener("touchmove", (e) => {
     e,
     divBottom,
     (volume) => {
-      poesiaAudio.volume = volume;
-      /* updateProgressBar(progressPoesia, volume, true); */
+      poesia.volume = volume;
     },
     true
   ); // A interação na divBottom é horizontal
@@ -341,8 +308,7 @@ divLeft.addEventListener("mousemove", (e) => {
 
   const rect = divLeft.getBoundingClientRect();
   const opacity = 1 - adjustValue(e.clientY, rect.top + 50, rect.bottom - 50);
-  videoElement.style.opacity = opacity;
-  /* updateProgressBar(progressVideo, opacity, false); */
+  video.style.opacity = opacity;
 
   cursor.style.width = `${2 + opacity * 4}em`;
   cursor.style.height = `${2 + opacity * 4}em`;
@@ -355,22 +321,10 @@ divLeft.addEventListener("touchmove", (e) => {
     e,
     divLeft,
     (opacity) => {
-      videoElement.style.opacity = 1 - opacity;
-      /* updateProgressBar(progressVideo, opacity, false); */
+      video.style.opacity = 1 - opacity;
     },
     false
   );
-});
-
-faixaElements.forEach((faixa) => {
-  faixa.addEventListener("click", () => {
-    if (!interactionEnabled) return;
-
-    const trackId = faixa.getAttribute("data-track");
-    const trackElement = document.getElementById(trackId);
-
-    playTrack(trackElement);
-  });
 });
 
 const hoverLinks = document.querySelectorAll(".hover-link");
@@ -392,6 +346,7 @@ function showInteractions() {
     div.classList.add("active");
     div.classList.remove("hidden");
   });
+
 }
 
 function hideInteractions() {
@@ -399,7 +354,10 @@ function hideInteractions() {
     div.classList.add("hidden");
     div.classList.remove("active");
   });
+
 }
+
+
 
 let inactivityTimer;
 
@@ -443,3 +401,29 @@ touchDivs.forEach((div) => {
 });
 
 
+document.querySelectorAll('.divRight div, .divLeft div, .divTop div, .divBottom div').forEach(div => {
+  div.addEventListener('mouseover', () => {
+    // Remove "visited" de outros irmãos
+    div.parentElement.querySelectorAll('div').forEach(sibling => sibling.classList.remove('visited'));
+    // Adiciona "visited" ao elemento atual
+    div.classList.add('visited');
+  });
+
+  div.addEventListener('click', () => {
+    // Remove "active" de outros irmãos
+    div.parentElement.querySelectorAll('div').forEach(sibling => sibling.classList.remove('active'));
+    // Adiciona "active" ao elemento atual
+    div.classList.add('active');
+  });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.getElementById('menuToggle');
+  const menuContent = document.getElementById('menuContent');
+
+  menuToggle.addEventListener('click', () => {
+      menuContent.classList.toggle('expanded'); // Alterna a classe para expandir/recolher
+  });
+});

@@ -1,56 +1,42 @@
-const buttonStart = document.getElementById("buttonStart");
 const introSelvagem = document.getElementById("introSelvagem");
 const selvagemProgram = document.getElementById("selvagemProgram");
-const outroSelvagem = document.getElementById("outroSelvagem");
-
-buttonStart.addEventListener("click", () => {
-  introSelvagem.style.opacity = "0";
-
-  setTimeout(() => {
-    introSelvagem.style.display = "none";
-    selvagemProgram.style.display = "block";
-    setVisibility(introSelvagem, true);
-    setVisibility(selvagemProgram, false);
-    setTimeout(() => {
-      selvagemProgram.style.opacity = "1";
-    }, 50);
-  }, 400);
-});
-
-function setVisibility(item, status) {
-  if (status) {
-    item.classList.add("hidden");
-    item.classList.remove("visible");
-  } else {
-    item.classList.remove("hidden");
-    item.classList.add("visible");
-  }
-}
-
-let currentTrack = document.querySelector(".track1");
-
-let jazzAudio = currentTrack.querySelector(".jazz");
-let poesiaAudio = currentTrack.querySelector(".poesia");
-let videoElement = currentTrack.querySelector(".video");
-let legendasVideo = currentTrack.querySelector(".legendas");
-
-//const loadingText = document.getElementById("loadingText");
-
-const faixaElements = document.querySelectorAll(".faixa");
-const faixaTitles = document.querySelectorAll(".faixaTitle .faixa");
-let pTrack = 1;
+const submitPasswordButton = document.getElementById("submitPassword");
+const passwordInput = document.getElementById("passwordInput");
+const cursor = document.getElementById("cursor");
+const trackPlaying = document.getElementById("trackPlaying");
 
 let interactionEnabled = false;
 
-function setInitialProgress() {
-  jazzAudio.volume = 1.0;
-  poesiaAudio.volume = 1.0;
-  videoElement.style.opacity = 1.0;
-  legendasVideo.style.opacity = 1.0;
+function submitPassword() {
+  const password = passwordInput.value;
+  
+  if (password === "HUMANIDADE") {
+    introSelvagem.style.transition = "opacity 0.4s";
+    selvagemProgram.style.transition = "opacity 0.4s";
+
+    introSelvagem.style.opacity = "0";
+    selvagemProgram.style.opacity = "1";
+
+    setTimeout(() => {
+      introSelvagem.classList.remove("visible");
+      introSelvagem.classList.add("hidden");
+      selvagemProgram.classList.remove("hidden");
+      selvagemProgram.classList.add("visible");
+    }, 400);
+
+    interactionEnabled = true;
+  } else {
+    alert("Palavra-passe incorreta!");
+  }
 }
 
-// Adicionando o cursor customizado
-const cursor = document.getElementById("cursor");
+submitPasswordButton.addEventListener("click", submitPassword);
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    submitPassword();
+  }
+});
+
 document.addEventListener("mousemove", (e) => {
   const mouseX = e.clientX;
   const mouseY = e.clientY;
@@ -63,16 +49,34 @@ function adjustCursorSize(value) {
   cursor.style.height = `${2 + value * 4}em`;
 }
 
-buttonStart.addEventListener("click", () => {
+let currentTrack = document.querySelector(".track1");
+let jazzAudio = currentTrack.querySelector(".jazz");
+let poesiaAudio = currentTrack.querySelector(".poesia");
+let videoElement = currentTrack.querySelector(".video");
+let legendasVideo = currentTrack.querySelector(".legendas");
+
+const faixaElements = document.querySelectorAll(".faixaNum"); // Certifique-se de usar a classe correta.
+const faixaTitles = document.querySelectorAll(".faixaTitle .faixa"); // Ajuste se necessário.
+
+let pTrack = 1;
+
+function setInitialProgress() {
+  jazzAudio.volume = 1.0;
+  poesiaAudio.volume = 1.0;
+  videoElement.style.opacity = 1.0;
+  legendasVideo.style.opacity = 1.0;
+}
+
+document.getElementById("submitPassword").addEventListener("click", () => {
   interactionEnabled = true;
 
   faixaElements.forEach((faixa) => {
     faixa.removeAttribute("disabled");
   });
 
-
   loadGroup(1);
 });
+
 
 let video = document.getElementById("video");
 let legendas = document.getElementById("legendas");
@@ -123,11 +127,9 @@ function loadGroup(groupNumber) {
   
   document.getElementById('loading').style.display = 'block';
 
-
-  faixaElements[pTrack].classList.remove("active-track");
-  faixaTitles[pTrack].classList.remove("active-track");
-  faixaElements[groupNumber - 1].classList.add("active-track");
-  faixaTitles[groupNumber - 1].classList.add("active-track");
+  const trackNames = ["Luz", "Fim de Tarde", "Instantâneo", "Dependência / Correntes Marítimas", "Periferia", "O Cão Sozinho", "Canção dos Brancos Negros", "Altura", "Humanidade", "Arqueologia"];
+  document.getElementById("trackNumberPlaying").textContent = groupNumber.toString().padStart(2, '0');
+  document.getElementById("trackPlaying").textContent = trackNames[groupNumber - 1];
 
   // Set new sources for the selected group
   video.setAttribute(
@@ -147,51 +149,49 @@ function loadGroup(groupNumber) {
     `data/track/${groupNumber}/Luz${groupNumber}_instrumental.wav`
   );
 
-// Add ended event listener to video to load the next group
-video.addEventListener("ended", function onVideoEnd() {
-  video.classList.add("fade-out");
+  video.addEventListener("ended", function onVideoEnd() {
+    video.classList.add("fade-out");
 
-  video.addEventListener("transitionend", function onTransitionEnd() {
-    video.classList.remove("fade-out");
+    video.addEventListener("transitionend", function onTransitionEnd() {
+      video.classList.remove("fade-out");
 
-    if (groupNumber < 10) {
-      let nextGroup = groupNumber + 1;
-      loadGroup(nextGroup);
+      if (groupNumber < 10) {
+        let nextGroup = groupNumber + 1;
+        loadGroup(nextGroup);
 
-      video.classList.add("fade-in");
+        video.classList.add("fade-in");
 
-      video.addEventListener("transitionend", function onFadeInEnd() {
-        video.classList.remove("fade-in");
-      }, { once: true });
-
-    } else {
-      selvagemProgram.classList.add("fade-out");
-      
-      pauseCurrentTrack();
-      setVisibility(selvagemProgram, true);
-      setVisibility(outroSelvagem, false);
-
-      setTimeout(() => {
-        selvagemProgram.classList.remove("fade-out");
-        selvagemProgram.classList.add("fade-in");
-
-        selvagemProgram.addEventListener("transitionend", function onSelvagemProgramFadeInEnd() {
-          selvagemProgram.classList.remove("fade-in");
+        video.addEventListener("transitionend", function onFadeInEnd() {
+          video.classList.remove("fade-in");
         }, { once: true });
-      }, 100);
-    }
-  }, { once: true });
 
-  video.removeEventListener("ended", onVideoEnd);
-});
+      } else {
+        selvagemProgram.classList.add("fade-out");
 
-checkCanPlayThrough();
-pTrack = groupNumber - 1;
+        pauseCurrentTrack();
+        setVisibility(selvagemProgram, true);
+        setVisibility(outroSelvagem, false);
 
-checkCanPlayThrough();
-pTrack = groupNumber - 1;
+        setTimeout(() => {
+          selvagemProgram.classList.remove("fade-out");
+          selvagemProgram.classList.add("fade-in");
 
+          selvagemProgram.addEventListener("transitionend", function onSelvagemProgramFadeInEnd() {
+            selvagemProgram.classList.remove("fade-in");
+          }, { once: true });
+        }, 100);
+      }
+    }, { once: true });
+
+    video.removeEventListener("ended", onVideoEnd);
+  });
+
+  checkCanPlayThrough();
+  pTrack = groupNumber - 1;
 }
+
+
+
 
 function adjustValue(position, start, end) {
   if (position < start) return 0;
@@ -340,8 +340,6 @@ hoverLinks.forEach((link) => {
 });
 
 const interactionDivs = document.querySelectorAll(".interation");
-const faixaInteration1 = document.getElementById("faixaInteration1");
-const faixaInteration2 = document.getElementById("faixaInteration2");
 
 function showInteractions() {
   interactionDivs.forEach((div) => {
@@ -349,10 +347,6 @@ function showInteractions() {
     div.classList.remove("hidden");
   });
 
-  faixaInteration1.classList.add("active");
-  faixaInteration1.classList.remove("hidden");
-  faixaInteration2.classList.add("active");
-  faixaInteration2.classList.remove("hidden");
 }
 
 function hideInteractions() {
@@ -361,25 +355,7 @@ function hideInteractions() {
     div.classList.remove("active");
   });
 
-  faixaInteration1.classList.add("hidden");
-  faixaInteration1.classList.remove("active");
-  faixaInteration2.classList.add("hidden");
-  faixaInteration2.classList.remove("active");
 }
-
-// Ensure faixaInteration is always active
-faixaInteration1.classList.add("active");
-faixaInteration1.classList.remove("hidden");
-faixaInteration2.classList.add("active");
-faixaInteration2.classList.remove("hidden");
-
-// Add event listener for window resize to ensure elements remain visible
-window.addEventListener('resize', () => {
-  faixaInteration1.classList.add("active");
-  faixaInteration1.classList.remove("hidden");
-  faixaInteration2.classList.add("active");
-  faixaInteration2.classList.remove("hidden");
-});
 
 
 
@@ -438,5 +414,16 @@ document.querySelectorAll('.divRight div, .divLeft div, .divTop div, .divBottom 
     div.parentElement.querySelectorAll('div').forEach(sibling => sibling.classList.remove('active'));
     // Adiciona "active" ao elemento atual
     div.classList.add('active');
+  });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.getElementById('menuToggle');
+  const menuContent = document.getElementById('menuContent');
+
+  menuToggle.addEventListener('click', () => {
+      menuContent.classList.toggle('expanded'); // Alterna a classe para expandir/recolher
   });
 });
