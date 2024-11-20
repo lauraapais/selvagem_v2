@@ -78,8 +78,8 @@ main {
   z-index: 500 !important;
 }
 
-.divLeft div{
-width:40px!important;
+.divLeft div {
+  width: 40px !important;
 }
 
 .faixaTitle .faixaNum.active-track,
@@ -152,7 +152,6 @@ width:40px!important;
   justify-content: center;
   transition: all 0.2s ease-in-out;
 }
-
 
 .divRight div.active,
 .divLeft div.active,
@@ -243,7 +242,6 @@ width:40px!important;
   top: 0;
   right: 0;
 }
-
 
 .type {
   padding: 30px;
@@ -358,14 +356,14 @@ main {
 }
 
 .gridProgram {
-  gap:0;
+  gap: 0;
   display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    padding-top: calc(var(--marginTop)* 3);
-    position: absolute;
-    top: 0;
-    width: 100vw !important;
-    height: calc(100vh - var(--marginTop)* 3);
+  grid-template-columns: repeat(10, 1fr);
+  padding-top: calc(var(--marginTop) * 3);
+  position: absolute;
+  top: 0;
+  width: 100vw !important;
+  height: calc(100vh - var(--marginTop) * 3);
 }
 
 .col-10-desktop {
@@ -382,9 +380,9 @@ p {
   padding-right: var(--desktopFontSize);
 }
 
-.textAlignLeft{
+.textAlignLeft {
   text-align: left;
-  padding-left: calc(var(--desktopFontSize)/4);
+  padding-left: calc(var(--desktopFontSize) / 4);
 }
 
 .textAlignRight1 {
@@ -419,7 +417,7 @@ p {
   left: 0;
 }
 
-#activediv{
+#activediv {
   width: 100vw;
   height: 100vh;
   background-color: rgb(25, 25, 25);
@@ -429,18 +427,16 @@ p {
 }
 
 #track1 {
-
 }
 
 .teaser .legendas {
   object-fit: scale-down !important;
   position: absolute;
-  top: 0;
-  left: calc(100vw / 10* 3);
-  width: calc(100vw / 10* 6);
+  top: calc(100vh / 7 * 2);
+  left: calc(100vw / 10);
+  width: calc(100vw / 10 * 6);
   height: auto;
 }
-
 
 #buttonStart p {
   text-decoration: underline;
@@ -462,7 +458,6 @@ p {
 .active-track {
   font-weight: bold;
 }
-
 
 /* Define os estados de visibilidade */
 .hidden {
@@ -554,48 +549,50 @@ input::placeholder {
   font-weight: bold;
 }
 
-#loading{
-  display:none;
+#loading {
+  display: none;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-
-
-.faixaTitle{
+.faixaTitle {
   display: flex;
-  
 }
 
-.trackPlayingdiv{
-  display: flex!important;
+.trackPlayingdiv {
+  display: flex !important;
 }
 
-#faixaInteration1{
+#faixaInteration1 {
   grid-column: 2 / 5;
 }
 
-.fade-out { opacity: 0; transition: opacity 1s ease-out; } .fade-in { opacity: 1; transition: opacity 1s ease-in; }
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+.fade-in {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
 
 #menuContent {
-  overflow: hidden;           /* Garante que o conteúdo oculto não apareça */
-  max-height: 0;              /* Começa recolhido */
+  overflow: hidden; /* Garante que o conteúdo oculto não apareça */
+  max-height: 0; /* Começa recolhido */
   transition: max-height 0.4s ease-in-out; /* Animação de altura */
 }
 
 #menuContent.expanded {
-  max-height: 500px;          /* Altura suficiente para exibir todo o conteúdo */
+  max-height: 500px; /* Altura suficiente para exibir todo o conteúdo */
 }
 
-
-#menuToggle:hover{
-font-weight: bold;
+#menuToggle:hover {
+  font-weight: bold;
 }
 
-
-#creditButton:hover{
+#creditButton:hover {
   font-weight: bold;
 }
 
@@ -623,13 +620,13 @@ font-weight: bold;
   .gridProgram {
     grid-template-columns: repeat(4, 1fr) !important;
     display: grid;
-    gap:0;
-  padding-top: 0 !important;
-  align-content: center;
-  height: 100vh;
-  grid-gap: 0;
-  transition: width 0.2s ease-in-out;
-  width:100vw;
+    gap: 0;
+    padding-top: 0 !important;
+    align-content: center;
+    height: 100vh;
+    grid-gap: 0;
+    transition: width 0.2s ease-in-out;
+    width: 100vw;
   }
 
   .divTop,
@@ -665,9 +662,7 @@ font-weight: bold;
     grid-template-rows: repeat(7, 1fr);
   }
 
-  
-
-  .faixaTitle{
+  .faixaTitle {
     grid-column: 3 / 5;
   }
 
