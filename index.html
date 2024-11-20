@@ -138,7 +138,8 @@
 
                         <div class="grid trackMedia"></div>
                         <!----------------------------------------Track 1---------------------------------------->
-                        <div id="faixa1" class="track1 mediaTrack "  style="display: grid; grid-template-columns: repeat(10, 1fr); gap: 10px; width:100vw; height: 100vh">
+                        <div id="faixa1" class="track1 mediaTrack "
+                            style="display: grid; grid-template-columns: repeat(10, 1fr); gap: 10px; width:100vw; height: 100vh">
                             <video preload="auto" id="video" class="video"></video>
                             <video preload="auto" muted id="legendas" class="legendas"></video>
                             <audio preload="auto" id="poesia" class="poesia"> </audio>
@@ -146,37 +147,84 @@
                         </div>
                     </div>
                     <div class="grid gridProgram faixas">
-                        <div class="desktopNone"></div>
-                        <div div="faixaInteration" id="faixaInteration1">
-                            <div id="trackPlayingdiv" style="display: flex; ">
-                                <p id="trackNumberPlaying" class="textAlignRight">01</p>
-                                <p id="trackPlaying"></p>
-                            </div>
+                        <div>
+                            <p id="trackNumberPlaying" class="textAlignRight">01</p>
                             <p><br></p>
-                            <p id="menuToggle" class="hover-link ">Faixas</p>
-                            <div id="menuContent">
+                            <p><br></p>
+                            <div id="menuContent1">
                                 <div class="faixaTitle">
                                     <p class="hover-link faixa textAlignRight faixaNum active-track" data-track="1"
                                         onclick="loadGroup(1)">01</p>
-                                    <p class="hover-link faixa faixaNum active-track" data-track="1"
-                                        onclick="loadGroup(1)">Luz</p>
                                 </div>
                                 <div class="faixaTitle">
                                     <p class="hover-link faixa textAlignRight faixaNum" data-track="2"
                                         onclick="loadGroup(2)">02</p>
-                                    <p class="hover-link faixa faixaNum" data-track="2" onclick="loadGroup(2)">Fim de
-                                        Tarde</p>
                                 </div>
                                 <div class="faixaTitle">
                                     <p class="hover-link faixa textAlignRight faixaNum" data-track="3"
                                         onclick="loadGroup(3)">03</p>
-                                    <p class="hover-link faixa faixaNum" data-track="3" onclick="loadGroup(3)">
-                                        Instantâneo</p>
                                 </div>
                                 <div class="faixaTitle">
                                     <p class="hover-link faixa textAlignRight faixaNum" data-track="4"
                                         onclick="loadGroup(4)">04
                                     </p>
+                                    
+                                </div>
+                                <p><br></p>
+                                    <p><br></p>
+                                <div class="faixaTitle">
+                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="5"
+                                        onclick="loadGroup(5)">05
+                                    </p>
+                                </div>
+                                <div class="faixaTitle">
+                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="6"
+                                        onclick="loadGroup(6)">06
+                                    </p>
+                                </div>
+                                <div class="faixaTitle">
+                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="7"
+                                        onclick="loadGroup(7)">07
+                                    </p>
+                                </div>
+                                <p><br></p>
+                                <div class="faixaTitle">
+                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="8"
+                                        onclick="loadGroup(8)">08
+                                    </p>
+                                </div>
+                               
+                                <div class="faixaTitle">
+                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="9"
+                                        onclick="loadGroup(9)">09
+                                    </p>
+                                </div>
+                                <div class="faixaTitle">
+                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="10"
+                                        onclick="loadGroup(10)">10</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div div="faixaInteration" id="faixaInteration1">
+                            <div id="trackPlayingdiv" style="display: flex; ">
+                                <p id="trackPlaying"></p>
+                            </div>
+                            <p><br></p>
+                            <p id="menuToggle" class="hover-link">Menu</p>
+                            <div id="menuContent2">
+                                <div class="faixaTitle">
+                                    <p class="hover-link faixa faixaNum active-track" data-track="1"
+                                        onclick="loadGroup(1)">Luz</p>
+                                </div>
+                                <div class="faixaTitle">
+                                    <p class="hover-link faixa faixaNum" data-track="2" onclick="loadGroup(2)">Fim de
+                                        Tarde</p>
+                                </div>
+                                <div class="faixaTitle">
+                                    <p class="hover-link faixa faixaNum" data-track="3" onclick="loadGroup(3)">
+                                        Instantâneo</p>
+                                </div>
+                                <div class="faixaTitle">
                                     <p class="hover-link faixa faixaNum" data-track="4" onclick="loadGroup(4)">
                                         Dependência
                                         /<br>Correntes
@@ -184,47 +232,29 @@
                                     </p>
                                 </div>
                                 <div class="faixaTitle">
-                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="5"
-                                        onclick="loadGroup(5)">05
-                                    </p>
                                     <p class="hover-link faixa faixaNum" data-track="5" onclick="loadGroup(5)">Periferia
                                     </p>
                                 </div>
                                 <div class="faixaTitle">
-                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="6"
-                                        onclick="loadGroup(6)">06
-                                    </p>
                                     <p class="hover-link faixa faixaNum" data-track="6" onclick="loadGroup(6)">O Cão
                                         Sozinho</p>
                                 </div>
                                 <div class="faixaTitle">
-                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="7"
-                                        onclick="loadGroup(7)">07
-                                    </p>
                                     <p class="hover-link faixa faixaNum" data-track="7" onclick="loadGroup(7)">Canção
                                         dos
                                         <br>Brancos Negros
                                     </p>
                                 </div>
                                 <div class="faixaTitle">
-                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="8"
-                                        onclick="loadGroup(8)">08
-                                    </p>
                                     <p class="hover-link faixa faixaNum" data-track="8" onclick="loadGroup(8)">Altura
                                     </p>
 
                                 </div>
                                 <div class="faixaTitle">
-                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="9"
-                                        onclick="loadGroup(9)">09
-                                    </p>
                                     <p class="hover-link faixa faixaNum" data-track="9" onclick="loadGroup(9)">
                                         Humanidade</p>
                                 </div>
                                 <div class="faixaTitle">
-                                    <p class="hover-link faixa textAlignRight faixaNum" data-track="10"
-                                        onclick="loadGroup(10)">
-                                        10</p>
                                     <p class="hover-link faixa textAlignRight faixaNum" data-track="10"
                                         onclick="loadGroup(10)">
                                         Arqueologia</p>

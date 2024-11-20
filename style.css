@@ -131,10 +131,83 @@ main {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
 }
+.divTop div:nth-child(n) {
+  border-right: calc(1px * var(--i)) solid white;
+}
+.divBottom div:nth-child(n) {
+  border-right: calc(1px * var(--i)) solid white;
+}
+.divRight div:nth-child(n) {
+  border-top: calc(1px * var(--i)) solid white;
+}
+.divLeft div:nth-child(n) {
+  border-top: calc(1px * var(--i)) solid white;
+}
+.divTop div:nth-child(n)::before,
+.divBottom div:nth-child(n)::before,
+.divRight div:nth-child(n)::before,
+.divLeft div:nth-child(n)::before {
+  content: attr(--i);
+} /* Definindo o valor inicial da variável --i */
+.divTop div:nth-child(1),
+.divBottom div:nth-child(1),
+.divRight div:nth-child(7),
+.divLeft div:nth-child(7) {
+  --i: 0.5;
+}
+.divTop div:nth-child(2),
+.divBottom div:nth-child(2),
+.divRight div:nth-child(6),
+.divLeft div:nth-child(6) {
+  --i: 1;
+}
+.divTop div:nth-child(3),
+.divBottom div:nth-child(3),
+.divRight div:nth-child(5),
+.divLeft div:nth-child(5) {
+  --i: 1.5;
+}
+.divTop div:nth-child(4),
+.divBottom div:nth-child(4),
+.divRight div:nth-child(4),
+.divLeft div:nth-child(4) {
+  --i: 2;
+}
+.divTop div:nth-child(5),
+.divBottom div:nth-child(5),
+.divRight div:nth-child(3),
+.divLeft div:nth-child(3) {
+  --i: 2.5;
+}
+.divTop div:nth-child(6),
+.divBottom div:nth-child(6),
+.divRight div:nth-child(2),
+.divLeft div:nth-child(2) {
+  --i: 3;
+}
+.divTop div:nth-child(7),
+.divBottom div:nth-child(7),
+.divRight div:nth-child(1),
+.divLeft div:nth-child(1) {
+  --i: 3.5;
+}
+
+.divTop div:nth-child(8),
+.divBottom div:nth-child(8){
+  --i: 4;
+}
+.divTop div:nth-child(9),
+.divBottom div:nth-child(9){
+  --i: 4.5;
+}
+
+.divTop div:nth-child(10),
+.divBottom div:nth-child(10){
+  --i: 5;
+}
 
 .divTop div,
 .divBottom div {
-  border-right: 1px solid white;
   height: 100%;
   display: flex;
   align-items: center;
@@ -144,35 +217,36 @@ main {
 
 .divRight div,
 .divLeft div {
-  border-top: 1px solid white;
   height: 100%;
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: flex-end;
   transition: all 0.2s ease-in-out;
 }
 
-.divRight div.active,
-.divLeft div.active,
+
+.divTop div.visited:nth-child(n) {
+  border-right: calc(1px * var(--i)) solid #ed1c24;
+}
+.divBottom div.visited:nth-child(n) {
+  border-right: calc(1px * var(--i)) solid #ed1c24;
+}
+.divRight div.visited:nth-child(n) {
+  border-top: calc(1px * var(--i)) solid #ed1c24;
+}
+.divLeft div.visited:nth-child(n) {
+  border-top: calc(1px * var(--i)) solid #ed1c24;
+}
+
 .divRight div.visited,
 .divLeft div.visited {
-  width: 100%;
-  border-top: 3px solid #ed1c24;
   transition: all 0.2s ease-in-out;
 }
 
-.divTop div.active,
-.divBottom div.active,
-.divTop div.visited,
-.divBottom div.visited {
-  height: 100%;
-  border-right: 3px solid #ed1c24;
-  transition: all 0.2s ease-in-out;
-}
 
-.divRight div:first-child,
-.divLeft div:first-child {
+.divRight div:nth-child(1),
+.divLeft div:nth-child(1) {
   border: none !important;
 }
 
@@ -221,7 +295,7 @@ main {
 
 .divLeft p,
 .divRight p {
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) translate(50%, 0);
 }
 
 .track {
@@ -434,7 +508,7 @@ p {
   position: absolute;
   top: calc(100vh / 7 * 2);
   left: calc(100vw / 10);
-  width: calc(100vw / 10 * 6);
+  width: calc(100vw / 10 * 5);
   height: auto;
 }
 
@@ -578,22 +652,40 @@ input::placeholder {
   transition: opacity 1s ease-in;
 }
 
-#menuContent {
+#menuContent1,
+#menuContent2 {
   overflow: hidden; /* Garante que o conteúdo oculto não apareça */
   max-height: 0; /* Começa recolhido */
   transition: max-height 0.4s ease-in-out; /* Animação de altura */
 }
 
-#menuContent.expanded {
+#menuContent1.expanded,
+#menuContent2.expanded {
   max-height: 500px; /* Altura suficiente para exibir todo o conteúdo */
 }
 
+#menuContent1 .faixaTitle {
+  display: flex;
+  justify-content: flex-end;
+}
 #menuToggle:hover {
   font-weight: bold;
 }
 
 #creditButton:hover {
   font-weight: bold;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none; /* Impede interações enquanto oculto */
+  transition: opacity 0.4s ease-in-out;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: all; /* Permite interações quando visível */
+  transition: opacity 0.4s ease-in-out;
 }
 
 /* Ajustes para dispositivos móveis */

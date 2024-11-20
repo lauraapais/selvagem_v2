@@ -9,7 +9,7 @@ let interactionEnabled = false;
 
 function submitPassword() {
   const password = passwordInput.value;
-  
+
   if (password === "HUMANIDADE") {
     introSelvagem.style.transition = "opacity 0.4s";
     selvagemProgram.style.transition = "opacity 0.4s";
@@ -72,11 +72,13 @@ document.getElementById("submitPassword").addEventListener("click", () => {
 
   faixaElements.forEach((faixa) => {
     faixa.removeAttribute("disabled");
+    faixa.addEventListener("click", () => {
+      document.getElementById("menuContent").classList.remove("expanded"); // Recolhe o menu
+    });
   });
 
   loadGroup(1);
 });
-
 
 let video = document.getElementById("video");
 let legendas = document.getElementById("legendas");
@@ -99,7 +101,8 @@ function checkCanPlayThrough() {
     legendas.play();
     poesia.play();
     jazz.play();
-    document.getElementById('loading').style.display = 'none';  }
+    document.getElementById("loading").style.display = "none";
+  }
 }
 
 function pauseCurrentTrack() {
@@ -120,16 +123,64 @@ function pauseCurrentTrack() {
     jazz.currentTime = 0;
   }
 }
+function pauseAllMedia() {
+  // Seleciona os elementos de mídia
+  const video = document.getElementById("video");
+  const legendas = document.getElementById("legendas");
+  const poesia = document.getElementById("poesia");
+  const jazz = document.getElementById("jazz");
+
+  // Pausa o vídeo
+  if (video) {
+    video.pause();
+  }
+
+  // Pausa as legendas
+  if (legendas) {
+    legendas.pause();
+  }
+
+  // Pausa o áudio da poesia
+  if (poesia) {
+    poesia.pause();
+  }
+
+  // Pausa o áudio do jazz
+  if (jazz) {
+    jazz.pause();
+  }
+}
 
 function loadGroup(groupNumber) {
   // Pause and reset the current media
-  pauseCurrentTrack()
-  
-  document.getElementById('loading').style.display = 'block';
+  pauseCurrentTrack();
 
-  const trackNames = ["Luz", "Fim de Tarde", "Instantâneo", "Dependência / Correntes Marítimas", "Periferia", "O Cão Sozinho", "Canção dos Brancos Negros", "Altura", "Humanidade", "Arqueologia"];
-  document.getElementById("trackNumberPlaying").textContent = groupNumber.toString().padStart(2, '0');
-  document.getElementById("trackPlaying").textContent = trackNames[groupNumber - 1];
+  // Update active-track class for multiple elements
+  let previousTracks = document.querySelectorAll(`[data-track="${pTrack + 1}"]`);
+  let newTracks = document.querySelectorAll(`[data-track="${groupNumber}"]`);
+  previousTracks.forEach(track => track.classList.remove("active-track"));
+  newTracks.forEach(track => track.classList.add("active-track"));
+
+
+  document.getElementById("loading").style.display = "block";
+
+  const trackNames = [
+    "Luz",
+    "Fim de Tarde",
+    "Instantâneo",
+    "Dependência / Correntes Marítimas",
+    "Periferia",
+    "O Cão Sozinho",
+    "Canção dos Brancos Negros",
+    "Altura",
+    "Humanidade",
+    "Arqueologia",
+  ];
+  document.getElementById("trackNumberPlaying").textContent = groupNumber
+    .toString()
+    .padStart(2, "0");
+  document.getElementById("trackPlaying").textContent =
+    trackNames[groupNumber - 1];
 
   // Set new sources for the selected group
   video.setAttribute(
@@ -152,36 +203,32 @@ function loadGroup(groupNumber) {
   video.addEventListener("ended", function onVideoEnd() {
     video.classList.add("fade-out");
 
-    video.addEventListener("transitionend", function onTransitionEnd() {
-      video.classList.remove("fade-out");
+    video.addEventListener(
+      "transitionend",
+      function onTransitionEnd() {
+        video.classList.remove("fade-out");
 
-      if (groupNumber < 10) {
-        let nextGroup = groupNumber + 1;
-        loadGroup(nextGroup);
+        if (groupNumber < 10) {
+          // Carrega o próximo grupo
+          let nextGroup = groupNumber + 1;
+          loadGroup(nextGroup);
 
-        video.classList.add("fade-in");
+          video.classList.add("fade-in");
 
-        video.addEventListener("transitionend", function onFadeInEnd() {
-          video.classList.remove("fade-in");
-        }, { once: true });
-
-      } else {
-        selvagemProgram.classList.add("fade-out");
-
-        pauseCurrentTrack();
-        setVisibility(selvagemProgram, true);
-        setVisibility(outroSelvagem, false);
-
-        setTimeout(() => {
-          selvagemProgram.classList.remove("fade-out");
-          selvagemProgram.classList.add("fade-in");
-
-          selvagemProgram.addEventListener("transitionend", function onSelvagemProgramFadeInEnd() {
-            selvagemProgram.classList.remove("fade-in");
-          }, { once: true });
-        }, 100);
-      }
-    }, { once: true });
+          video.addEventListener(
+            "transitionend",
+            function onFadeInEnd() {
+              video.classList.remove("fade-in");
+            },
+            { once: true }
+          );
+        } else {
+          // Transição para os créditos
+          toggleCreditView(); // Chamamos a função que já lida com a transição
+        }
+      },
+      { once: true }
+    );
 
     video.removeEventListener("ended", onVideoEnd);
   });
@@ -189,9 +236,6 @@ function loadGroup(groupNumber) {
   checkCanPlayThrough();
   pTrack = groupNumber - 1;
 }
-
-
-
 
 function adjustValue(position, start, end) {
   if (position < start) return 0;
@@ -346,7 +390,6 @@ function showInteractions() {
     div.classList.add("active");
     div.classList.remove("hidden");
   });
-
 }
 
 function hideInteractions() {
@@ -354,10 +397,7 @@ function hideInteractions() {
     div.classList.add("hidden");
     div.classList.remove("active");
   });
-
 }
-
-
 
 let inactivityTimer;
 
@@ -400,30 +440,57 @@ touchDivs.forEach((div) => {
   div.addEventListener("touchend", deactivateDiv);
 });
 
+document
+  .querySelectorAll(".divRight div, .divLeft div, .divTop div, .divBottom div")
+  .forEach((div) => {
+    div.addEventListener("mouseover", () => {
+      // Remove "visited" de outros irmãos
+      div.parentElement
+        .querySelectorAll("div")
+        .forEach((sibling) => sibling.classList.remove("visited"));
+      // Adiciona "visited" ao elemento atual
+      div.classList.add("visited");
+    });
 
-document.querySelectorAll('.divRight div, .divLeft div, .divTop div, .divBottom div').forEach(div => {
-  div.addEventListener('mouseover', () => {
-    // Remove "visited" de outros irmãos
-    div.parentElement.querySelectorAll('div').forEach(sibling => sibling.classList.remove('visited'));
-    // Adiciona "visited" ao elemento atual
-    div.classList.add('visited');
+    div.addEventListener("click", () => {
+      // Remove "active" de outros irmãos
+      div.parentElement
+        .querySelectorAll("div")
+        .forEach((sibling) => sibling.classList.remove("active"));
+      // Adiciona "active" ao elemento atual
+      div.classList.add("active");
+    });
   });
 
-  div.addEventListener('click', () => {
-    // Remove "active" de outros irmãos
-    div.parentElement.querySelectorAll('div').forEach(sibling => sibling.classList.remove('active'));
-    // Adiciona "active" ao elemento atual
-    div.classList.add('active');
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
+  const menuContent1 = document.getElementById("menuContent1");
+  const menuContent2 = document.getElementById("menuContent2");
+
+  menuToggle.addEventListener("click", () => {
+    menuContent1.classList.toggle("expanded"); // Alterna a classe para expandir/recolher
+    menuContent2.classList.toggle("expanded"); // Alterna a classe para expandir/recolher
   });
 });
 
+function toggleCreditView() {
+  pauseAllMedia();
+  // Define as transições
+  selvagemProgram.style.transition = "opacity 0.4s";
+  outroSelvagem.style.transition = "opacity 0.4s";
 
+  // Esconde selvagemProgram e mostra outroSelvagem
+  selvagemProgram.style.opacity = "0";
+  outroSelvagem.style.opacity = "1";
 
-document.addEventListener('DOMContentLoaded', () => {
-  const menuToggle = document.getElementById('menuToggle');
-  const menuContent = document.getElementById('menuContent');
+  // Aguarda o tempo da transição para alterar as classes
+  setTimeout(() => {
+    selvagemProgram.classList.remove("visible");
+    selvagemProgram.classList.add("hidden");
+    outroSelvagem.classList.remove("hidden");
+    outroSelvagem.classList.add("visible");
+  }, 400); // Duração da transição
+}
 
-  menuToggle.addEventListener('click', () => {
-      menuContent.classList.toggle('expanded'); // Alterna a classe para expandir/recolher
-  });
-});
+// Adiciona o evento de clique ao botão
+creditButton.addEventListener("click", toggleCreditView);

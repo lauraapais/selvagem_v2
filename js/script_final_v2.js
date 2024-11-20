@@ -421,9 +421,11 @@ document.querySelectorAll('.divRight div, .divLeft div, .divTop div, .divBottom 
 
 document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.getElementById('menuToggle');
-  const menuContent = document.getElementById('menuContent');
+  const menuContent1 = document.getElementById('menuContent1');
+  const menuContent2 = document.getElementById('menuContent2');
+
 
   menuToggle.addEventListener('click', () => {
-      menuContent.classList.toggle('expanded'); // Alterna a classe para expandir/recolher
+      menuContent2.classList.toggle('expanded'); // Alterna a classe para expandir/recolher
   });
 });
