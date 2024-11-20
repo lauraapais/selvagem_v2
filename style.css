@@ -358,6 +358,7 @@ main {
 }
 
 .gridProgram {
+  gap:0;
   display: grid;
     grid-template-columns: repeat(10, 1fr);
     padding-top: calc(var(--marginTop)* 3);
@@ -428,18 +429,16 @@ p {
 }
 
 #track1 {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  padding-top: calc(var(--marginTop)* 3);
-  height: 100vh;
-  border: 1px solid red; /* Adicionando uma borda para ver a área do grid */
+
 }
 
 .teaser .legendas {
   object-fit: scale-down !important;
-  grid-column: 3 / span 7 !important;  /* Alinha a legenda à terceira coluna e faz ela ocupar da 3ª à 10ª coluna */
-  position: fixed;
-  width: 100%;  /* Ou um valor fixo se preferir */
+  position: absolute;
+  top: 0;
+  left: calc(100vw / 10* 3);
+  width: calc(100vw / 10* 6);
+  height: auto;
 }
 
 
@@ -624,6 +623,7 @@ font-weight: bold;
   .gridProgram {
     grid-template-columns: repeat(4, 1fr) !important;
     display: grid;
+    gap:0;
   padding-top: 0 !important;
   align-content: center;
   height: 100vh;
