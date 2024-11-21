@@ -746,8 +746,6 @@ input::placeholder {
     grid-template-columns: repeat(4, 1fr) !important;
     display: grid;
     gap: 0;
-    padding-top: 0 !important;
-    align-content: center;
     height: 100vh;
     grid-gap: 0;
     transition: width 0.2s ease-in-out;
@@ -756,7 +754,7 @@ input::placeholder {
 
   .divTop,
   .divBottom {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 
   .divTop {
