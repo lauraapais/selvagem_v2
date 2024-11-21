@@ -25,6 +25,12 @@ function submitPassword() {
       selvagemProgram.classList.remove("hidden");
       selvagemProgram.classList.add("visible");
 
+menuContent1.classList.add("expanded");
+    menuContent2.classList.add("expanded");
+    menuToggle.classList.remove("visible");
+      trackNumberPlaying.classList.remove("visible");
+      trackPlayingdiv.classList.remove("visible");
+
       resetMediaSources();
     }, 400);
 
