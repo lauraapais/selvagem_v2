@@ -28,6 +28,7 @@ function submitPassword() {
   } else {
     alert("Palavra-passe incorreta!");
   }
+  passwordInput.value = "";
 }
 
 submitPasswordButton.addEventListener("click", submitPassword);
@@ -462,16 +463,28 @@ document
     });
   });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const menuToggle = document.getElementById("menuToggle");
-  const menuContent1 = document.getElementById("menuContent1");
-  const menuContent2 = document.getElementById("menuContent2");
-
-  menuToggle.addEventListener("click", () => {
-    menuContent1.classList.toggle("expanded"); // Alterna a classe para expandir/recolher
-    menuContent2.classList.toggle("expanded"); // Alterna a classe para expandir/recolher
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menuToggle");
+    const menuContent1 = document.getElementById("menuContent1");
+    const menuContent2 = document.getElementById("menuContent2");
+    const faixaElements = document.querySelectorAll(".faixaNum"); // Seleciona as faixas
+  
+    // Alterna a expansão do menu ao clicar no botão de toggle
+    menuToggle.addEventListener("click", () => {
+      menuContent1.classList.toggle("expanded");
+      menuContent2.classList.toggle("expanded");
+    });
+  
+    // Fecha o menu ao clicar em uma faixa
+    faixaElements.forEach((faixa) => {
+      faixa.addEventListener("click", () => {
+        menuContent1.classList.remove("expanded");
+        menuContent2.classList.remove("expanded");
+      });
+    });
+  
   });
-});
+  
 
 function toggleCreditView() {
   pauseAllMedia();
@@ -494,3 +507,24 @@ function toggleCreditView() {
 
 // Adiciona o evento de clique ao botão
 creditButton.addEventListener("click", toggleCreditView);
+
+
+const backCreditsButton = document.getElementById("backCredits");
+
+backCreditsButton.addEventListener("click", () => {
+  // Define as transições
+  outroSelvagem.style.transition = "opacity 0.4s";
+  introSelvagem.style.transition = "opacity 0.4s";
+
+  // Esconde outroSelvagem e mostra introSelvagem
+  outroSelvagem.style.opacity = "0";
+  introSelvagem.style.opacity = "1";
+
+  // Aguarda o tempo da transição para alterar as classes
+  setTimeout(() => {
+    outroSelvagem.classList.remove("visible");
+    outroSelvagem.classList.add("hidden");
+    introSelvagem.classList.remove("hidden");
+    introSelvagem.classList.add("visible");
+  }, 400); // Duração da transição
+});

@@ -688,6 +688,12 @@ input::placeholder {
   transition: opacity 0.4s ease-in-out;
 }
 
+#backCredits{
+  position: absolute;
+  bottom: 0;
+  text-decoration: underline;
+}
+
 /* Ajustes para dispositivos móveis */
 @media (max-width: 768px) {
   p {
