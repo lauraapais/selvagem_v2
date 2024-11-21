@@ -203,19 +203,19 @@ function loadGroup(groupNumber) {
 
   video.addEventListener("ended", function onVideoEnd() {
     video.classList.add("fade-out");
-
+  
     video.addEventListener(
       "transitionend",
       function onTransitionEnd() {
         video.classList.remove("fade-out");
-
+  
         if (groupNumber < 10) {
           // Carrega o próximo grupo
           let nextGroup = groupNumber + 1;
           loadGroup(nextGroup);
-
+  
           video.classList.add("fade-in");
-
+  
           video.addEventListener(
             "transitionend",
             function onFadeInEnd() {
@@ -223,14 +223,14 @@ function loadGroup(groupNumber) {
             },
             { once: true }
           );
-        } else {
+        } else if (groupNumber === 10) {
           // Transição para os créditos
-          toggleCreditView(); // Chamamos a função que já lida com a transição
+          toggleCreditView(); // Exibe os créditos
         }
       },
       { once: true }
     );
-
+  
     video.removeEventListener("ended", onVideoEnd);
   });
 
@@ -528,3 +528,7 @@ backCreditsButton.addEventListener("click", () => {
     introSelvagem.classList.add("visible");
   }, 400); // Duração da transição
 });
+
+
+
+
