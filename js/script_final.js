@@ -195,16 +195,12 @@ function loadGroup(groupNumber) {
   // Video End
   video.addEventListener("ended", function onVideoEnd() {
     let nextGroup = pTrack + 1;
-    console.log("ID:" + nextGroup);
     if (nextGroup < 10) {
-      console.log("NEXT:" + nextGroup);
       loadGroup(nextGroup);
     } else if (nextGroup === 10) {
-      console.log("END:" + nextGroup);
       video.classList.add("fade-out");
 
       setTimeout(function () {
-        console.log("CALL END");
         video.classList.remove("fade-out");
         toggleCreditView();
       }, 1000);
@@ -512,7 +508,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function toggleCreditView() {
-  console.log("TOGGLE KEK");
   pauseAllMedia();
 
   video.removeEventListener("canplaythrough", checkCanPlayThrough);
