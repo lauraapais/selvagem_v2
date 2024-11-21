@@ -4,6 +4,7 @@ const submitPasswordButton = document.getElementById("submitPassword");
 const passwordInput = document.getElementById("passwordInput");
 const cursor = document.getElementById("cursor");
 const trackPlaying = document.getElementById("trackPlaying");
+const outroSelvagem = document.getElementById("outroSelvagem");
 
 let interactionEnabled = false;
 
@@ -74,13 +75,6 @@ function setInitialProgress() {
 document.getElementById("submitPassword").addEventListener("click", () => {
   interactionEnabled = true;
 
-  faixaElements.forEach((faixa) => {
-    faixa.removeAttribute("disabled");
-    faixa.addEventListener("click", () => {
-      document.getElementById("menuContent").classList.remove("expanded"); // Recolhe o menu
-    });
-  });
-
   loadGroup(1);
 });
 
@@ -149,16 +143,16 @@ function pauseAllMedia() {
   }
 }
 
-
 function loadGroup(groupNumber) {
   pauseCurrentTrack();
 
   // Update active-track class for multiple elements
-  let previousTracks = document.querySelectorAll(`[data-track="${pTrack + 1}"]`);
+  let previousTracks = document.querySelectorAll(
+    `[data-track="${pTrack + 1}"]`
+  );
   let newTracks = document.querySelectorAll(`[data-track="${groupNumber}"]`);
-  previousTracks.forEach(track => track.classList.remove("active-track"));
-  newTracks.forEach(track => track.classList.add("active-track"));
-
+  previousTracks.forEach((track) => track.classList.remove("active-track"));
+  newTracks.forEach((track) => track.classList.add("active-track"));
 
   document.getElementById("loading").style.display = "block";
 
@@ -198,30 +192,29 @@ function loadGroup(groupNumber) {
     `data/track/${groupNumber}/Luz${groupNumber}_instrumental.wav`
   );
 
+  // Video End
   video.addEventListener("ended", function onVideoEnd() {
-    if (groupNumber < 10) {
-        // Carrega o próximo grupo sem fade
-        let nextGroup = groupNumber + 1;
-        loadGroup(nextGroup);
-    } else if (groupNumber === 10) {
-        // Adiciona fade-out para o último grupo
-        video.classList.add("fade-out");
-  
-        video.addEventListener(
-            "transitionend",
-            function onTransitionEnd() {
-                video.classList.remove("fade-out");
-                // Transição para os créditos
-                toggleCreditView(); // Exibe os créditos
-            },
-            { once: true }
-        );
-    }
-    video.removeEventListener("ended", onVideoEnd);
-});
+    let nextGroup = pTrack + 1;
+    console.log("ID:" + nextGroup);
+    if (nextGroup < 10) {
+      console.log("NEXT:" + nextGroup);
+      loadGroup(nextGroup);
+    } else if (nextGroup === 10) {
+      console.log("END:" + nextGroup);
+      video.classList.add("fade-out");
 
-checkCanPlayThrough();
-pTrack = groupNumber - 1;
+      setTimeout(function () {
+        console.log("CALL END");
+        video.classList.remove("fade-out");
+        toggleCreditView();
+      }, 1000);
+    }
+
+    video.removeEventListener("ended", onVideoEnd);
+  });
+
+  checkCanPlayThrough();
+  pTrack = groupNumber - 1;
 }
 
 function adjustValue(position, start, end) {
@@ -374,7 +367,9 @@ const interactionDivs = document.querySelectorAll(
   ".interation, #faixaInteration1, #faixaInteration2"
 );
 
-const videoElements = document.querySelectorAll(".mediaTrack .video, .mediaTrack .legendas");
+const videoElements = document.querySelectorAll(
+  ".mediaTrack .video, .mediaTrack .legendas"
+);
 
 function showInteractions() {
   interactionDivs.forEach((div) => {
@@ -416,7 +411,6 @@ window.addEventListener("touchmove", resetInactivityTimer);
 
 // Inicialmente, esconde os elementos
 hideInteractions();
-
 
 //Feedback Interação Programa
 const touchDivs = document.querySelectorAll(
@@ -467,90 +461,86 @@ document
     });
   });
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const menuToggle = document.getElementById("menuToggle");
-    const trackNumberPlaying = document.getElementById("trackNumberPlaying");
-    const trackPlayingdiv = document.getElementById("trackPlayingdiv");
-    const menuContent1 = document.getElementById("menuContent1");
-    const menuContent2 = document.getElementById("menuContent2");
-    const faixaElements = document.querySelectorAll(".faixaNum");
-  
-    // Função para fechar o menu
-    function closeMenu() {
-      menuContent1.classList.remove("expanded");
-      menuContent2.classList.remove("expanded");
-      menuToggle.classList.add("visible");
-      trackNumberPlaying.classList.add("visible");
-      trackPlayingdiv.classList.add("visible");
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
+  const trackNumberPlaying = document.getElementById("trackNumberPlaying");
+  const trackPlayingdiv = document.getElementById("trackPlayingdiv");
+  const menuContent1 = document.getElementById("menuContent1");
+  const menuContent2 = document.getElementById("menuContent2");
+  const faixaElements = document.querySelectorAll(".faixaNum");
+
+  // Função para fechar o menu
+  function closeMenu() {
+    menuContent1.classList.remove("expanded");
+    menuContent2.classList.remove("expanded");
+    menuToggle.classList.add("visible");
+    trackNumberPlaying.classList.add("visible");
+    trackPlayingdiv.classList.add("visible");
+  }
+
+  // Alterna a expansão do menu ao clicar no botão de toggle
+  menuToggle.addEventListener("click", (event) => {
+    event.stopPropagation(); // Previne o evento de propagação para o documento
+    const isExpanded = menuContent1.classList.toggle("expanded");
+    menuContent2.classList.toggle("expanded");
+
+    if (isExpanded) {
+      menuToggle.classList.remove("visible");
+      trackNumberPlaying.classList.remove("visible");
+      trackPlayingdiv.classList.remove("visible");
+    } else {
+      closeMenu();
     }
-  
-    // Alterna a expansão do menu ao clicar no botão de toggle
-    menuToggle.addEventListener("click", (event) => {
-      event.stopPropagation(); // Previne o evento de propagação para o documento
-      const isExpanded = menuContent1.classList.toggle("expanded");
-      menuContent2.classList.toggle("expanded");
-  
-      if (isExpanded) {
-        menuToggle.classList.remove("visible");
-        trackNumberPlaying.classList.remove("visible");
-        trackPlayingdiv.classList.remove("visible");
-      } else {
-        closeMenu();
-      }
-    });
-  
-    // Fecha o menu ao clicar em uma faixa
-    faixaElements.forEach((faixa) => {
-      faixa.addEventListener("click", () => {
-        closeMenu();
-      });
-    });
-  
-    // Fecha o menu ao clicar em qualquer lugar fora dele
-    document.addEventListener("click", (event) => {
-      const isClickInsideMenu = menuContent1.contains(event.target) || menuContent2.contains(event.target);
-      if (!isClickInsideMenu) {
-        closeMenu();
-      }
+  });
+
+  // Fecha o menu ao clicar em uma faixa
+  faixaElements.forEach((faixa) => {
+    faixa.addEventListener("click", () => {
+      closeMenu();
     });
   });
-  
-  
-  
 
-  function toggleCreditView() {
-    pauseAllMedia();
-    
-    // Remove listeners
-    video.removeEventListener("canplaythrough", checkCanPlayThrough);
-    legendas.removeEventListener("canplaythrough", checkCanPlayThrough);
-    poesia.removeEventListener("canplaythrough", checkCanPlayThrough);
-    jazz.removeEventListener("canplaythrough", checkCanPlayThrough);
-  
-    // Previne autoplay
-    video.removeAttribute("autoplay");
-    legendas.removeAttribute("autoplay");
-    poesia.removeAttribute("autoplay");
-    jazz.removeAttribute("autoplay");
-  
-    // Transição para os créditos
-    selvagemProgram.style.transition = "opacity 0.4s";
-    outroSelvagem.style.transition = "opacity 0.4s";
-    selvagemProgram.style.opacity = "0";
-    outroSelvagem.style.opacity = "1";
-  
-    setTimeout(() => {
-      selvagemProgram.classList.remove("visible");
-      selvagemProgram.classList.add("hidden");
-      outroSelvagem.classList.remove("hidden");
-      outroSelvagem.classList.add("visible");
-    }, 400);
-  }
-  
+  // Fecha o menu ao clicar em qualquer lugar fora dele
+  document.addEventListener("click", (event) => {
+    const isClickInsideMenu =
+      menuContent1.contains(event.target) ||
+      menuContent2.contains(event.target);
+    if (!isClickInsideMenu) {
+      closeMenu();
+    }
+  });
+});
 
-// Adiciona o evento de clique ao botão
+function toggleCreditView() {
+  console.log("TOGGLE KEK");
+  pauseAllMedia();
+
+  video.removeEventListener("canplaythrough", checkCanPlayThrough);
+  legendas.removeEventListener("canplaythrough", checkCanPlayThrough);
+  poesia.removeEventListener("canplaythrough", checkCanPlayThrough);
+  jazz.removeEventListener("canplaythrough", checkCanPlayThrough);
+
+  // Prevent autoplay
+  video.removeAttribute("autoplay");
+  legendas.removeAttribute("autoplay");
+  poesia.removeAttribute("autoplay");
+  jazz.removeAttribute("autoplay");
+
+  // Transition to credits
+  selvagemProgram.style.transition = "opacity 0.4s";
+  outroSelvagem.style.transition = "opacity 0.4s";
+  selvagemProgram.style.opacity = "0";
+  outroSelvagem.style.opacity = "1";
+
+  setTimeout(() => {
+    selvagemProgram.classList.remove("visible");
+    selvagemProgram.classList.add("hidden");
+    outroSelvagem.classList.remove("hidden");
+    outroSelvagem.classList.add("visible");
+  }, 400);
+}
+
 creditButton.addEventListener("click", toggleCreditView);
-
 
 const backCreditsButton = document.getElementById("backCredits");
 
@@ -585,7 +575,6 @@ function resetCursorSize() {
 [divTop, divBottom, divLeft, divRight].forEach((div) => {
   div.addEventListener("mouseleave", resetCursorSize);
 });
-
 
 // Função para reiniciar os recursos de mídia
 function resetMediaSources() {
