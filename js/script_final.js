@@ -21,6 +21,7 @@ function submitPassword() {
       introSelvagem.classList.remove("visible");
       introSelvagem.classList.add("hidden");
       selvagemProgram.classList.remove("hidden");
+      selvagemProgram.classList.remove("hidden");
       selvagemProgram.classList.add("visible");
     }, 400);
 
@@ -125,35 +126,29 @@ function pauseCurrentTrack() {
   }
 }
 function pauseAllMedia() {
-  // Seleciona os elementos de mídia
-  const video = document.getElementById("video");
-  const legendas = document.getElementById("legendas");
-  const poesia = document.getElementById("poesia");
-  const jazz = document.getElementById("jazz");
-
-  // Pausa o vídeo
   if (video) {
     video.pause();
+    video.currentTime = 0;
   }
 
-  // Pausa as legendas
   if (legendas) {
     legendas.pause();
+    legendas.currentTime = 0;
   }
 
-  // Pausa o áudio da poesia
   if (poesia) {
     poesia.pause();
+    poesia.currentTime = 0;
   }
 
-  // Pausa o áudio do jazz
   if (jazz) {
     jazz.pause();
+    jazz.currentTime = 0;
   }
 }
 
+
 function loadGroup(groupNumber) {
-  // Pause and reset the current media
   pauseCurrentTrack();
 
   // Update active-track class for multiple elements
@@ -384,7 +379,10 @@ hoverLinks.forEach((link) => {
   });
 });
 
-const interactionDivs = document.querySelectorAll(".interation");
+// Seleciona todos os elementos interativos, incluindo as novas interações
+const interactionDivs = document.querySelectorAll(
+  ".divTop, .divBottom, .divRight, .divLeft, #faixaInteration1, #faixaInteration2"
+);
 
 function showInteractions() {
   interactionDivs.forEach((div) => {
@@ -407,12 +405,16 @@ function resetInactivityTimer() {
 
   clearTimeout(inactivityTimer);
 
-  inactivityTimer = setTimeout(hideInteractions, 2000);
+  inactivityTimer = setTimeout(hideInteractions, 2000); // Esconde após 2 segundos de inatividade
 }
 
+// Adiciona eventos para redefinir o timer de inatividade
 window.addEventListener("mousemove", resetInactivityTimer);
 window.addEventListener("touchmove", resetInactivityTimer);
+
+// Inicialmente, oculta os elementos após carregar a página
 hideInteractions();
+
 
 //Feedback Interação Programa
 const touchDivs = document.querySelectorAll(
@@ -465,45 +467,84 @@ document
 
   document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.getElementById("menuToggle");
+    const trackNumberPlaying = document.getElementById("trackNumberPlaying");
+    const trackPlayingdiv = document.getElementById("trackPlayingdiv");
     const menuContent1 = document.getElementById("menuContent1");
     const menuContent2 = document.getElementById("menuContent2");
-    const faixaElements = document.querySelectorAll(".faixaNum"); // Seleciona as faixas
+    const faixaElements = document.querySelectorAll(".faixaNum");
+  
+    // Função para fechar o menu
+    function closeMenu() {
+      menuContent1.classList.remove("expanded");
+      menuContent2.classList.remove("expanded");
+      menuToggle.classList.add("visible");
+      trackNumberPlaying.classList.add("visible");
+      trackPlayingdiv.classList.add("visible");
+    }
   
     // Alterna a expansão do menu ao clicar no botão de toggle
-    menuToggle.addEventListener("click", () => {
-      menuContent1.classList.toggle("expanded");
+    menuToggle.addEventListener("click", (event) => {
+      event.stopPropagation(); // Previne o evento de propagação para o documento
+      const isExpanded = menuContent1.classList.toggle("expanded");
       menuContent2.classList.toggle("expanded");
+  
+      if (isExpanded) {
+        menuToggle.classList.remove("visible");
+        trackNumberPlaying.classList.remove("visible");
+        trackPlayingdiv.classList.remove("visible");
+      } else {
+        closeMenu();
+      }
     });
   
     // Fecha o menu ao clicar em uma faixa
     faixaElements.forEach((faixa) => {
       faixa.addEventListener("click", () => {
-        menuContent1.classList.remove("expanded");
-        menuContent2.classList.remove("expanded");
+        closeMenu();
       });
     });
   
+    // Fecha o menu ao clicar em qualquer lugar fora dele
+    document.addEventListener("click", (event) => {
+      const isClickInsideMenu = menuContent1.contains(event.target) || menuContent2.contains(event.target);
+      if (!isClickInsideMenu) {
+        closeMenu();
+      }
+    });
   });
   
+  
+  
 
-function toggleCreditView() {
-  pauseAllMedia();
-  // Define as transições
-  selvagemProgram.style.transition = "opacity 0.4s";
-  outroSelvagem.style.transition = "opacity 0.4s";
-
-  // Esconde selvagemProgram e mostra outroSelvagem
-  selvagemProgram.style.opacity = "0";
-  outroSelvagem.style.opacity = "1";
-
-  // Aguarda o tempo da transição para alterar as classes
-  setTimeout(() => {
-    selvagemProgram.classList.remove("visible");
-    selvagemProgram.classList.add("hidden");
-    outroSelvagem.classList.remove("hidden");
-    outroSelvagem.classList.add("visible");
-  }, 400); // Duração da transição
-}
+  function toggleCreditView() {
+    pauseAllMedia();
+    
+    // Remove listeners
+    video.removeEventListener("canplaythrough", checkCanPlayThrough);
+    legendas.removeEventListener("canplaythrough", checkCanPlayThrough);
+    poesia.removeEventListener("canplaythrough", checkCanPlayThrough);
+    jazz.removeEventListener("canplaythrough", checkCanPlayThrough);
+  
+    // Previne autoplay
+    video.removeAttribute("autoplay");
+    legendas.removeAttribute("autoplay");
+    poesia.removeAttribute("autoplay");
+    jazz.removeAttribute("autoplay");
+  
+    // Transição para os créditos
+    selvagemProgram.style.transition = "opacity 0.4s";
+    outroSelvagem.style.transition = "opacity 0.4s";
+    selvagemProgram.style.opacity = "0";
+    outroSelvagem.style.opacity = "1";
+  
+    setTimeout(() => {
+      selvagemProgram.classList.remove("visible");
+      selvagemProgram.classList.add("hidden");
+      outroSelvagem.classList.remove("hidden");
+      outroSelvagem.classList.add("visible");
+    }, 400);
+  }
+  
 
 // Adiciona o evento de clique ao botão
 creditButton.addEventListener("click", toggleCreditView);
@@ -530,5 +571,16 @@ backCreditsButton.addEventListener("click", () => {
 });
 
 
+// Tamanho padrão do cursor
+const defaultCursorSize = "2em";
 
+// Função para redefinir o tamanho do cursor
+function resetCursorSize() {
+  cursor.style.width = defaultCursorSize;
+  cursor.style.height = defaultCursorSize;
+}
 
+// Adiciona o evento 'mouseleave' para todos os divs interativos
+[divTop, divBottom, divLeft, divRight].forEach((div) => {
+  div.addEventListener("mouseleave", resetCursorSize);
+});

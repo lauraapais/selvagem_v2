@@ -215,6 +215,14 @@ main {
   transition: all 0.2s ease-in-out;
 }
 
+.divTop div{
+  align-items: flex-end;
+}
+
+.divBottom div{
+  align-items: flex-start;
+}
+
 .divRight div,
 .divLeft div {
   height: 100%;
@@ -225,6 +233,13 @@ main {
   transition: all 0.2s ease-in-out;
 }
 
+.divLeft div, .divRight div{
+  justify-content: flex-start
+}
+
+.divRight div{
+  justify-content: flex-end;
+}
 
 .divTop div.visited:nth-child(n) {
   border-right: calc(1px * var(--i)) solid #ed1c24;
@@ -360,14 +375,6 @@ main {
   color: white;
 }
 
-.loading-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  color: var(--text);
-}
 
 @media screen and (max-width: 900px) {
   #cursor {
@@ -608,7 +615,7 @@ button {
 
 input {
   all: unset;
-  border-bottom: 1px solid white;
+  border-bottom:none;
   font-size: var(--desktopFontSize);
   color: white;
 }
@@ -626,21 +633,15 @@ input::placeholder {
 #loading {
   display: none;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  bottom:20vh;
 }
 
 .faixaTitle {
   display: flex;
 }
 
-.trackPlayingdiv {
-  display: flex !important;
-}
-
-#faixaInteration1 {
-  grid-column: 2 / 5;
+#faixaInteration2 {
+  grid-column: 2 / 4;
 }
 
 .fade-out {
@@ -664,12 +665,21 @@ input::placeholder {
   max-height: 500px; /* Altura suficiente para exibir todo o conteúdo */
 }
 
-#menuContent1 .faixaTitle {
-  display: flex;
-  justify-content: flex-end;
+#menuToggle,
+#trackNumberPlaying,
+#trackPlayingdiv {
+  display: none; /* Inicialmente ocultos */
 }
-#menuToggle:hover {
-  font-weight: bold;
+
+#menuToggle.visible,
+#trackNumberPlaying.visible,
+#trackPlayingdiv.visible {
+  display: block; /* Ou flex, dependendo do layout */
+}
+
+
+#menuContent1 .faixaTitle{
+  justify-content: flex-end;
 }
 
 #creditButton:hover {
