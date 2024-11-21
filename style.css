@@ -634,6 +634,7 @@ input::placeholder {
   display: none;
   position: absolute;
   bottom:20vh;
+  left: calc(100vw / 10 );
 }
 
 .faixaTitle {
@@ -651,6 +652,11 @@ input::placeholder {
 .fade-in {
   opacity: 1;
   transition: opacity 1s ease-in;
+}
+
+.video,
+.legendas {
+  transition: filter 0.5s ease; /* Transição suave de 0.5 segundos */
 }
 
 #menuContent1,
@@ -784,6 +790,10 @@ input::placeholder {
     grid-template-columns: repeat(4, 1fr);
   }
 
+  .legendas{
+    display: none;
+  }
+  
   #legendas1 {
     grid-row: 2;
     grid-column: 1 / 5;

@@ -23,6 +23,8 @@ function submitPassword() {
       selvagemProgram.classList.remove("hidden");
       selvagemProgram.classList.remove("hidden");
       selvagemProgram.classList.add("visible");
+
+      resetMediaSources();
     }, 400);
 
     interactionEnabled = true;
@@ -197,40 +199,29 @@ function loadGroup(groupNumber) {
   );
 
   video.addEventListener("ended", function onVideoEnd() {
-    video.classList.add("fade-out");
+    if (groupNumber < 10) {
+        // Carrega o próximo grupo sem fade
+        let nextGroup = groupNumber + 1;
+        loadGroup(nextGroup);
+    } else if (groupNumber === 10) {
+        // Adiciona fade-out para o último grupo
+        video.classList.add("fade-out");
   
-    video.addEventListener(
-      "transitionend",
-      function onTransitionEnd() {
-        video.classList.remove("fade-out");
-  
-        if (groupNumber < 10) {
-          // Carrega o próximo grupo
-          let nextGroup = groupNumber + 1;
-          loadGroup(nextGroup);
-  
-          video.classList.add("fade-in");
-  
-          video.addEventListener(
+        video.addEventListener(
             "transitionend",
-            function onFadeInEnd() {
-              video.classList.remove("fade-in");
+            function onTransitionEnd() {
+                video.classList.remove("fade-out");
+                // Transição para os créditos
+                toggleCreditView(); // Exibe os créditos
             },
             { once: true }
-          );
-        } else if (groupNumber === 10) {
-          // Transição para os créditos
-          toggleCreditView(); // Exibe os créditos
-        }
-      },
-      { once: true }
-    );
-  
+        );
+    }
     video.removeEventListener("ended", onVideoEnd);
-  });
+});
 
-  checkCanPlayThrough();
-  pTrack = groupNumber - 1;
+checkCanPlayThrough();
+pTrack = groupNumber - 1;
 }
 
 function adjustValue(position, start, end) {
@@ -379,15 +370,21 @@ hoverLinks.forEach((link) => {
   });
 });
 
-// Seleciona todos os elementos interativos, incluindo as novas interações
 const interactionDivs = document.querySelectorAll(
-  ".divTop, .divBottom, .divRight, .divLeft, #faixaInteration1, #faixaInteration2"
+  ".interation, #faixaInteration1, #faixaInteration2"
 );
+
+const videoElements = document.querySelectorAll(".mediaTrack .video, .mediaTrack .legendas");
 
 function showInteractions() {
   interactionDivs.forEach((div) => {
     div.classList.add("active");
     div.classList.remove("hidden");
+  });
+
+  // Aplicar o filtro brightness(0.5) às classes .video e .legendas
+  videoElements.forEach((video) => {
+    video.style.filter = "brightness(0.5)";
   });
 }
 
@@ -395,6 +392,11 @@ function hideInteractions() {
   interactionDivs.forEach((div) => {
     div.classList.add("hidden");
     div.classList.remove("active");
+  });
+
+  // Remover o filtro brightness(0.5) das classes .video e .legendas
+  videoElements.forEach((video) => {
+    video.style.filter = "none";
   });
 }
 
@@ -405,14 +407,14 @@ function resetInactivityTimer() {
 
   clearTimeout(inactivityTimer);
 
-  inactivityTimer = setTimeout(hideInteractions, 2000); // Esconde após 2 segundos de inatividade
+  inactivityTimer = setTimeout(hideInteractions, 2000); // 2 segundos de inatividade
 }
 
-// Adiciona eventos para redefinir o timer de inatividade
+// Adiciona eventos para detectar atividade no ecrã
 window.addEventListener("mousemove", resetInactivityTimer);
 window.addEventListener("touchmove", resetInactivityTimer);
 
-// Inicialmente, oculta os elementos após carregar a página
+// Inicialmente, esconde os elementos
 hideInteractions();
 
 
@@ -570,7 +572,6 @@ backCreditsButton.addEventListener("click", () => {
   }, 400); // Duração da transição
 });
 
-
 // Tamanho padrão do cursor
 const defaultCursorSize = "2em";
 
@@ -584,3 +585,28 @@ function resetCursorSize() {
 [divTop, divBottom, divLeft, divRight].forEach((div) => {
   div.addEventListener("mouseleave", resetCursorSize);
 });
+
+
+// Função para reiniciar os recursos de mídia
+function resetMediaSources() {
+  // Redefine as fontes dos elementos
+  video.setAttribute("src", `data/track/1/Luz1_video.mp4`);
+  legendas.setAttribute("src", `data/track/1/Luz1_legendas.mp4`);
+  poesia.setAttribute("src", `data/track/1/Luz1_voz.wav`);
+  jazz.setAttribute("src", `data/track/1/Luz1_instrumental.wav`);
+
+  // Restaura autoplay
+  video.setAttribute("autoplay", "true");
+  legendas.setAttribute("autoplay", "true");
+  poesia.setAttribute("autoplay", "true");
+  jazz.setAttribute("autoplay", "true");
+
+  // Reinstala os event listeners
+  video.addEventListener("canplaythrough", checkCanPlayThrough);
+  legendas.addEventListener("canplaythrough", checkCanPlayThrough);
+  poesia.addEventListener("canplaythrough", checkCanPlayThrough);
+  jazz.addEventListener("canplaythrough", checkCanPlayThrough);
+
+  // Restaura o progresso inicial
+  setInitialProgress();
+}
