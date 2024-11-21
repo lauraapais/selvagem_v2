@@ -121,29 +121,9 @@ function pauseCurrentTrack() {
     jazz.currentTime = 0;
   }
 }
-function pauseAllMedia() {
-  if (video) {
-    video.pause();
-    video.currentTime = 0;
-  }
-
-  if (legendas) {
-    legendas.pause();
-    legendas.currentTime = 0;
-  }
-
-  if (poesia) {
-    poesia.pause();
-    poesia.currentTime = 0;
-  }
-
-  if (jazz) {
-    jazz.pause();
-    jazz.currentTime = 0;
-  }
-}
 
 function loadGroup(groupNumber) {
+  console.log(groupNumber);
   pauseCurrentTrack();
 
   // Update active-track class for multiple elements
@@ -191,26 +171,29 @@ function loadGroup(groupNumber) {
     "src",
     `data/track/${groupNumber}/Luz${groupNumber}_instrumental.wav`
   );
+  
+  pauseCurrentTrack();
 
   // Video End
-  video.addEventListener("ended", function onVideoEnd() {
-    let nextGroup = pTrack + 1;
-    if (nextGroup < 10) {
-      loadGroup(nextGroup);
-    } else if (nextGroup === 10) {
-      video.classList.add("fade-out");
-
-      setTimeout(function () {
-        video.classList.remove("fade-out");
-        toggleCreditView();
-      }, 1000);
-    }
-
-    video.removeEventListener("ended", onVideoEnd);
-  });
+  video.removeEventListener("ended", onVideoEnd);
+  video.addEventListener("ended", onVideoEnd);
 
   checkCanPlayThrough();
   pTrack = groupNumber - 1;
+}
+
+function onVideoEnd() {
+  video.removeEventListener("ended", onVideoEnd);
+  let nextGroup = pTrack + 1;
+  if (nextGroup < 10) {
+    loadGroup(nextGroup + 1);
+  } else if (nextGroup === 10) {
+    video.classList.add("fade-out");
+    setTimeout(function () {
+      video.classList.remove("fade-out");
+      toggleCreditView();
+    }, 1000);
+  }
 }
 
 function adjustValue(position, start, end) {
@@ -508,7 +491,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function toggleCreditView() {
-  pauseAllMedia();
+  pauseCurrentTrack();
 
   video.removeEventListener("canplaythrough", checkCanPlayThrough);
   legendas.removeEventListener("canplaythrough", checkCanPlayThrough);

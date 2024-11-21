@@ -637,6 +637,10 @@ input::placeholder {
   background-color: transparent;
 }
 
+.textControl{
+  line-height: 0.8rem;
+}
+
 #submitPassword:hover {
   font-weight: bold;
 }
