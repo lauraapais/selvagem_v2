@@ -5,6 +5,9 @@ const passwordInput = document.getElementById("passwordInput");
 const cursor = document.getElementById("cursor");
 const trackPlaying = document.getElementById("trackPlaying");
 const outroSelvagem = document.getElementById("outroSelvagem");
+const creditButton = document.getElementById("creditButton");
+const creditButton2 = document.getElementById("creditButton2");
+
 
 let interactionEnabled = false;
 
@@ -349,7 +352,7 @@ hoverLinks.forEach((link) => {
 });
 
 const interactionDivs = document.querySelectorAll(
-  ".interation, #faixaInteration1, #faixaInteration2"
+  ".interation, #faixaInteration1, #faixaInteration2, #faixaInteration3"
 );
 
 const videoElements = document.querySelectorAll(
@@ -525,6 +528,8 @@ function toggleCreditView() {
 }
 
 creditButton.addEventListener("click", toggleCreditView);
+creditButton2.addEventListener("click", toggleCreditView);
+
 
 const backCreditsButton = document.getElementById("backCredits");
 

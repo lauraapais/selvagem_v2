@@ -725,6 +725,10 @@ input::placeholder {
   text-decoration: underline;
 }
 
+.desktopNone{
+  display: none;
+}
+
 /* Ajustes para dispositivos móveis */
 @media (max-width: 768px) {
   p {
@@ -735,6 +739,11 @@ input::placeholder {
   .mobileNone {
     display: none !important;
   }
+
+  .desktopNone{
+    display: block;
+  }
+  
 
   /* Intro */
   .gridIntro {
