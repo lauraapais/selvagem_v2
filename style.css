@@ -908,38 +908,38 @@ input::placeholder {
 }
 
 
-.divTop div:nth-child(7),
-.divBottom div:nth-child(7),
+.divTop div:nth-child(6),
+.divBottom div:nth-child(6),
 .divRight div:nth-child(7),
 .divLeft div:nth-child(7) {
   --i: 0.5;
 }
-.divTop div:nth-child(6),
-.divBottom div:nth-child(6),
+.divTop div:nth-child(5),
+.divBottom div:nth-child(5),
 .divRight div:nth-child(6),
 .divLeft div:nth-child(6) {
   --i: 1;
 }
-.divTop div:nth-child(5),
-.divBottom div:nth-child(5),
+.divTop div:nth-child(4),
+.divBottom div:nth-child(4),
 .divRight div:nth-child(5),
 .divLeft div:nth-child(5) {
   --i: 1.5;
 }
-.divTop div:nth-child(4),
-.divBottom div:nth-child(4),
+.divTop div:nth-child(3),
+.divBottom div:nth-child(3),
 .divRight div:nth-child(4),
 .divLeft div:nth-child(4) {
   --i: 2;
 }
-.divTop div:nth-child(3),
-.divBottom div:nth-child(3),
+.divTop div:nth-child(2),
+.divBottom div:nth-child(2),
 .divRight div:nth-child(3),
 .divLeft div:nth-child(3) {
   --i: 2.5;
 }
-.divTop div:nth-child(2),
-.divBottom div:nth-child(2),
+.divTop div:nth-child(1),
+.divBottom div:nth-child(1),
 .divRight div:nth-child(2),
 .divLeft div:nth-child(2) {
   --i: 3;
