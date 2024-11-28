@@ -389,7 +389,6 @@ main {
 
 @media screen and (max-width: 900px) {
   #cursor {
-    display: none;
   }
 
   .faixas {
@@ -456,6 +455,7 @@ main {
   top: 0;
   width: 100vw !important;
   height: calc(100vh - var(--marginTop) * 3);
+  
 }
 
 .col-10-desktop {
@@ -747,14 +747,24 @@ input::placeholder {
 
   /* Programa */
   .gridProgram {
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(7, 1fr) !important;
     display: grid;
     gap: 0;
-    height: 100vh;
+    height: calc(var(--vh, 1h)* 100);
     grid-gap: 0;
     transition: width 0.2s ease-in-out;
-    width: 100vw;
-  }
+    width: calc(var(--vh, 1h)* 100) !important;
+    transform: rotate(-90deg) translateX(6%);
+    padding-top: calc(var(--marginTop)* 2);
+}
+
+#faixaInteration1{
+  grid-column: 1 / 2;
+}
+
+#faixaInteration2{
+  grid-column: 2 / 4;
+}
 
   .divTop,
   .divBottom {
@@ -849,7 +859,7 @@ input::placeholder {
   }
 
 
-  .teaser video {
+  .mediaTrack video {
     width: 100vh;
     height: 100vh;
     object-fit: cover;
@@ -857,14 +867,5 @@ input::placeholder {
     top: 0;
     left: 0;
     transform: rotate(-90deg) translateY(-25%);
-}/*
-  .teaser video {
-    width: 100vh;
-    height: 100vh;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: rotate(-90deg) translateY(-25%);
-}*/
+}
 }
