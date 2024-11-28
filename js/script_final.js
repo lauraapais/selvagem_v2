@@ -615,3 +615,32 @@ function resetMediaSources() {
 }
 
 
+function activateDivOnTouch(event) {
+  const touchedDiv = event.target;
+  if (
+    touchedDiv.classList.contains("divTop") ||
+    touchedDiv.classList.contains("divBottom") ||
+    touchedDiv.classList.contains("divRight") ||
+    touchedDiv.classList.contains("divLeft")
+  ) {
+    touchedDiv.classList.add("active");
+  }
+}
+
+function deactivateDivOnTouch(event) {
+  const touchedDiv = event.target;
+  if (
+    touchedDiv.classList.contains("divTop") ||
+    touchedDiv.classList.contains("divBottom") ||
+    touchedDiv.classList.contains("divRight") ||
+    touchedDiv.classList.contains("divLeft")
+  ) {
+    touchedDiv.classList.remove("active");
+  }
+}
+
+// Adicione eventos touchmove
+[divTop, divBottom, divLeft, divRight].forEach((div) => {
+  div.addEventListener("touchmove", activateDivOnTouch); // Ativa a borda
+  div.addEventListener("touchend", deactivateDivOnTouch); // Desativa ao final do toque
+});

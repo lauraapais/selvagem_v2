@@ -779,7 +779,7 @@ input::placeholder {
 }
 
 #faixaInteration3{
-  grid-column: 7 / 8;
+  grid-column: 6 / 7;
 }
 
 #faixaInteration1, #faixaInteration2, #faixaInteration3{
@@ -890,7 +890,7 @@ input::placeholder {
   #loading {
     position: absolute;
     top:60px;
-    left: calc(var(--vh, 1h) * 100 / 7 * 5);;
+    left: calc(var(--vh, 1h) * 100 / 7 * 4);;
   }
   
   .track1{
