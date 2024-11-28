@@ -746,6 +746,9 @@ input::placeholder {
   
 
   /* Intro */
+  .grid{
+    padding-top:0!important;
+  }
   .gridIntro {
     grid-template-columns: repeat(3, 1fr) !important;
     height: calc(var(--vh, 1h) * 100 - var(--marginTop) * 1.5);
@@ -764,7 +767,7 @@ input::placeholder {
     transition: width 0.2s ease-in-out;
     width: calc(var(--vh, 1h)* 100) !important;
     transform: rotate(-90deg) translateX(0);
-    padding-top: calc(30px * 4);
+    padding-top:0!important;
 }
 
 #faixaInteration1{
@@ -777,6 +780,10 @@ input::placeholder {
 
 #faixaInteration3{
   grid-column: 6 / 7;
+}
+
+#faixaInteration1, #faixaInteration2, #faixaInteration3{
+  padding-top:calc(30px * 2);
 }
 
   .divTop,
@@ -810,6 +817,10 @@ input::placeholder {
   .divRight,
   .divLeft {
     grid-template-rows: repeat(7, 1fr);
+  }
+
+  .divLeft div {
+    width: 30px !important;
   }
 
   .faixaTitle {
