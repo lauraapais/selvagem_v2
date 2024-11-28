@@ -755,7 +755,7 @@ input::placeholder {
     transition: width 0.2s ease-in-out;
     width: calc(var(--vh, 1h)* 100) !important;
     transform: rotate(-90deg) translateX(6%);
-    padding-top: calc(var(--marginTop)* 2);
+    padding-top: calc(30px * 4);
 }
 
 #faixaInteration1{
