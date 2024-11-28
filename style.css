@@ -751,14 +751,19 @@ input::placeholder {
   .grid{
     padding-top:0!important;
   }
+  
   .gridIntro {
     grid-template-columns: repeat(3, 1fr) !important;
     height: calc(var(--vh, 1h) * 100 - var(--marginTop) * 1.5);
   }
+
   .gridIntro .col-10-desktop {
     grid-column: 3 / 4;
   }
+.gridIntro , .gridOutro{
+  padding-top: calc(var(--marginMobile) * 3)!important;
 
+}
   /* Programa */
   .gridProgram {
     grid-template-columns: repeat(7, 1fr) !important;
