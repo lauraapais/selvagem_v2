@@ -763,7 +763,7 @@ input::placeholder {
     grid-gap: 0;
     transition: width 0.2s ease-in-out;
     width: calc(var(--vh, 1h)* 100) !important;
-    transform: rotate(-90deg) translateX(6%);
+    transform: rotate(-90deg) translateX(0);
     padding-top: calc(30px * 4);
 }
 
