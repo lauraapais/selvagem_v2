@@ -615,26 +615,3 @@ function resetMediaSources() {
 }
 
 
-// Função para ativar a classe "active" no toque
-function activateDivTouch(event) {
-  const touchedDiv = event.target.closest('.divTop, .divBottom, .divRight, .divLeft');
-  if (touchedDiv) {
-    touchedDiv.classList.add('active');
-    touchedDiv.classList.remove('hidden');
-  }
-}
-
-// Função para desativar a classe "active" quando o toque termina
-function deactivateDivTouch(event) {
-  const touchedDiv = event.target.closest('.divTop, .divBottom, .divRight, .divLeft');
-  if (touchedDiv) {
-    touchedDiv.classList.remove('active');
-  }
-}
-
-// Atualize os eventos de touch para as divs
-[divTop, divBottom, divLeft, divRight].forEach((div) => {
-  div.addEventListener('touchstart', activateDivTouch);
-  div.addEventListener('touchmove', activateDivTouch); // Marcas vermelhas aparecem durante o deslizar
-  div.addEventListener('touchend', deactivateDivTouch);
-});
