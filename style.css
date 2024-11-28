@@ -389,7 +389,6 @@ main {
 
 @media screen and (max-width: 900px) {
   #cursor {
-    display: none;
   }
 
   .faixas {
@@ -803,9 +802,6 @@ input::placeholder {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  .legendas{
-    display: none;
-  }
 
   #legendas1 {
     grid-row: 2;
@@ -842,4 +838,30 @@ input::placeholder {
     color: white;
     background-color: transparent;
   }
+
+  #loading {
+    bottom:40vh;
+    left: calc(100vw / 4)* 3!important;
+  }
+
+
+  .teaser video {
+    width: 100vh;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(-90deg) translateY(-25%);
+}
+
+.teaser legendas {
+  width: 100vh;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg) translateY(-25%);
+}
 }
