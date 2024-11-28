@@ -844,11 +844,11 @@ input::placeholder {
   .teaser .legendas {
     object-fit: scale-down !important;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: calc(100vh / 10);
+    /* right: 0; */
     width: calc(100vh / 1.4);
     height: auto;
-    transform: rotate(-90deg) translate(-25%);
+    transform: rotate(-90deg);
 }
 
   #legendas1 {
@@ -893,6 +893,9 @@ input::placeholder {
     left: calc(var(--vh, 1h) * 100 / 7 * 5);;
   }
   
+  .track1{
+    position: relative;
+  }
 
   .mediaTrack video {
     width: 100vh;
@@ -903,4 +906,49 @@ input::placeholder {
     left: 0;
     transform: rotate(-90deg) translateY(-25%);
 }
+
+
+.divTop div:nth-child(7),
+.divBottom div:nth-child(7),
+.divRight div:nth-child(7),
+.divLeft div:nth-child(7) {
+  --i: 0.5;
+}
+.divTop div:nth-child(6),
+.divBottom div:nth-child(6),
+.divRight div:nth-child(6),
+.divLeft div:nth-child(6) {
+  --i: 1;
+}
+.divTop div:nth-child(5),
+.divBottom div:nth-child(5),
+.divRight div:nth-child(5),
+.divLeft div:nth-child(5) {
+  --i: 1.5;
+}
+.divTop div:nth-child(4),
+.divBottom div:nth-child(4),
+.divRight div:nth-child(4),
+.divLeft div:nth-child(4) {
+  --i: 2;
+}
+.divTop div:nth-child(3),
+.divBottom div:nth-child(3),
+.divRight div:nth-child(3),
+.divLeft div:nth-child(3) {
+  --i: 2.5;
+}
+.divTop div:nth-child(2),
+.divBottom div:nth-child(2),
+.divRight div:nth-child(2),
+.divLeft div:nth-child(2) {
+  --i: 3;
+}
+.divTop div:nth-child(1),
+.divBottom div:nth-child(1),
+.divRight div:nth-child(1),
+.divLeft div:nth-child(1) {
+  --i: 3.5;
+}
+
 }

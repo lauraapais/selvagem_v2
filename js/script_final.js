@@ -253,7 +253,24 @@ divTop.addEventListener("mousemove", (e) => {
   cursor.style.height = `${2 + volume * 4}em`;
 });
 
+divTop.addEventListener("touchmove", (e) => {
+  if (!interactionEnabled) return;
 
+  handleTouchMove(
+    e,
+    divTop,
+    (volume) => {
+      if (isMobile()) {
+        // No mobile, ajuste para mais baixo no lado direito e mais alto no lado esquerdo
+        jazz.volume = 1 - volume; // Inverta o volume no mobile
+      } else {
+        jazz.volume = volume;
+      }
+      updateProgressBar(progressJazz, jazz.volume, true);
+    },
+    true
+  );
+});
 
 divRight.addEventListener("mousemove", (e) => {
   if (!interactionEnabled) return;
@@ -266,7 +283,18 @@ divRight.addEventListener("mousemove", (e) => {
   cursor.style.height = `${2 + opacity * 4}em`;
 });
 
+divRight.addEventListener("touchmove", (e) => {
+  if (!interactionEnabled) return;
 
+  handleTouchMove(
+    e,
+    divRight,
+    (opacity) => {
+      legendas.style.opacity = 1 - opacity;
+    },
+    false
+  );
+});
 
 divBottom.addEventListener("mousemove", (e) => {
   if (!interactionEnabled) return;
@@ -279,7 +307,24 @@ divBottom.addEventListener("mousemove", (e) => {
   cursor.style.height = `${2 + volume * 4}em`;
 });
 
+divBottom.addEventListener("touchmove", (e) => {
+  if (!interactionEnabled) return;
 
+  handleTouchMove(
+    e,
+    divBottom,
+    (volume) => {
+      if (isMobile()) {
+        // No mobile, ajuste para mais baixo no lado direito e mais alto no lado esquerdo
+        poesia.volume = 1 - volume; // Inverta o volume no mobile
+      } else {
+        poesia.volume = volume;
+      }
+      updateProgressBar(progressPoesia, poesia.volume, true);
+    },
+    true
+  ); // A interação na divBottom é horizontal
+});
 
 divLeft.addEventListener("mousemove", (e) => {
   if (!interactionEnabled) return;
@@ -292,48 +337,6 @@ divLeft.addEventListener("mousemove", (e) => {
   cursor.style.height = `${2 + opacity * 4}em`;
 });
 
-divTop.addEventListener("touchmove", (e) => {
-  if (!interactionEnabled) return;
-
-  handleTouchMove(
-    e,
-    divTop,
-    (volume) => {
-      jazz.volume = volume;
-      divTop.style.border = `2px solid rgba(255, 0, 0, ${volume})`; // Borda vermelha dinâmica
-    },
-    true
-  );
-});
-
-divRight.addEventListener("touchmove", (e) => {
-  if (!interactionEnabled) return;
-
-  handleTouchMove(
-    e,
-    divRight,
-    (opacity) => {
-      legendas.style.opacity = 1 - opacity;
-      divRight.style.border = `2px solid rgba(255, 0, 0, ${1 - opacity})`; // Borda vermelha dinâmica
-    },
-    false
-  );
-});
-
-divBottom.addEventListener("touchmove", (e) => {
-  if (!interactionEnabled) return;
-
-  handleTouchMove(
-    e,
-    divBottom,
-    (volume) => {
-      poesia.volume = volume;
-      divBottom.style.border = `2px solid rgba(255, 0, 0, ${volume})`; // Borda vermelha dinâmica
-    },
-    true
-  );
-});
-
 divLeft.addEventListener("touchmove", (e) => {
   if (!interactionEnabled) return;
 
@@ -342,7 +345,6 @@ divLeft.addEventListener("touchmove", (e) => {
     divLeft,
     (opacity) => {
       video.style.opacity = 1 - opacity;
-      divLeft.style.border = `2px solid rgba(255, 0, 0, ${1 - opacity})`; // Borda vermelha dinâmica
     },
     false
   );
@@ -591,5 +593,6 @@ function resetMediaSources() {
   poesia.addEventListener("canplaythrough", checkCanPlayThrough);
   jazz.addEventListener("canplaythrough", checkCanPlayThrough);
 
+  // Restaura o progresso inicial
   setInitialProgress();
 }
