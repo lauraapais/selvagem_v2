@@ -615,32 +615,24 @@ function resetMediaSources() {
 }
 
 
-function activateDivOnTouch(event) {
-  const touchedDiv = event.target;
-  if (
-    touchedDiv.classList.contains("divTop") ||
-    touchedDiv.classList.contains("divBottom") ||
-    touchedDiv.classList.contains("divRight") ||
-    touchedDiv.classList.contains("divLeft")
-  ) {
-    touchedDiv.classList.add("active");
+// Função para ativar a borda vermelha
+function activateDiv(event) {
+  const touchedDiv = event.target.closest(".divTop, .divBottom, .divRight, .divLeft");
+  if (touchedDiv) {
+    touchedDiv.classList.add("active-border");
   }
 }
 
-function deactivateDivOnTouch(event) {
-  const touchedDiv = event.target;
-  if (
-    touchedDiv.classList.contains("divTop") ||
-    touchedDiv.classList.contains("divBottom") ||
-    touchedDiv.classList.contains("divRight") ||
-    touchedDiv.classList.contains("divLeft")
-  ) {
-    touchedDiv.classList.remove("active");
+// Função para desativar a borda vermelha
+function deactivateDiv(event) {
+  const touchedDiv = event.target.closest(".divTop, .divBottom, .divRight, .divLeft");
+  if (touchedDiv) {
+    touchedDiv.classList.remove("active-border");
   }
 }
 
-// Adicione eventos touchmove
+// Adiciona o evento touchmove para ativar a borda
 [divTop, divBottom, divLeft, divRight].forEach((div) => {
-  div.addEventListener("touchmove", activateDivOnTouch); // Ativa a borda
-  div.addEventListener("touchend", deactivateDivOnTouch); // Desativa ao final do toque
+  div.addEventListener("touchmove", activateDiv);
+  div.addEventListener("touchend", deactivateDiv);
 });
