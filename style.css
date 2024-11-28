@@ -841,6 +841,16 @@ input::placeholder {
 
   }
 
+  .teaser .legendas {
+    object-fit: scale-down !important;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(100vh / 1.4);
+    height: auto;
+    transform: rotate(-90deg) translate(-25%);
+}
+
   #legendas1 {
     grid-row: 2;
     grid-column: 1 / 5;
@@ -877,11 +887,14 @@ input::placeholder {
     background-color: transparent;
   }
 
-  #loading {
-    bottom:40vh;
-    left: calc(100vw / 4)* 3!important;
-  }
 
+
+  #loading {
+    position: absolute;
+    top:60px;
+    left: calc(var(--vh, 1h) * 100 / 7 *6);;
+  }
+  
 
   .mediaTrack video {
     width: 100vh;
