@@ -615,24 +615,36 @@ function resetMediaSources() {
 }
 
 
-// Função para ativar a borda vermelha
-function activateDiv(event) {
-  const touchedDiv = event.target.closest(".divTop, .divBottom, .divRight, .divLeft");
-  if (touchedDiv) {
-    touchedDiv.classList.add("active-border");
-  }
-}
 
-// Função para desativar a borda vermelha
-function deactivateDiv(event) {
-  const touchedDiv = event.target.closest(".divTop, .divBottom, .divRight, .divLeft");
-  if (touchedDiv) {
-    touchedDiv.classList.remove("active-border");
-  }
-}
+document.querySelectorAll(".divRight div, .divLeft div, .divTop div, .divBottom div")
+  .forEach((div) => {
+    // Evento para mouseover
+    div.addEventListener("mouseover", () => {
+      // Remove "visited" de outros irmãos
+      div.parentElement
+        .querySelectorAll("div")
+        .forEach((sibling) => sibling.classList.remove("visited"));
+      // Adiciona "visited" ao elemento atual
+      div.classList.add("visited");
+    });
 
-// Adiciona o evento touchmove para ativar a borda
-[divTop, divBottom, divLeft, divRight].forEach((div) => {
-  div.addEventListener("touchmove", activateDiv);
-  div.addEventListener("touchend", deactivateDiv);
-});
+    // Evento para touchmove
+    div.addEventListener("touchmove", () => {
+      // Remove "visited" de outros irmãos
+      div.parentElement
+        .querySelectorAll("div")
+        .forEach((sibling) => sibling.classList.remove("visited"));
+      // Adiciona "visited" ao elemento atual
+      div.classList.add("visited");
+    });
+
+    // Evento para clique
+    div.addEventListener("click", () => {
+      // Remove "active" de outros irmãos
+      div.parentElement
+        .querySelectorAll("div")
+        .forEach((sibling) => sibling.classList.remove("active"));
+      // Adiciona "active" ao elemento atual
+      div.classList.add("active");
+    });
+  });

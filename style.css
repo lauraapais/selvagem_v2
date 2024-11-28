@@ -87,11 +87,6 @@ main {
   font-weight: bold;
 }
 
-.active-border {
-  border: 1px solid red;
-  transition: border 0.2s ease-in-out;
-}
-
 
 .divTop {
   position: absolute;
