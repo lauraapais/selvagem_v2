@@ -390,6 +390,7 @@ main {
 
 @media screen and (max-width: 900px) {
   #cursor {
+    display: none;
   }
 
   .faixas {
