@@ -628,14 +628,23 @@ document.querySelectorAll(".divRight div, .divLeft div, .divTop div, .divBottom 
       div.classList.add("visited");
     });
 
-    // Evento para touchmove
-    div.addEventListener("touchmove", () => {
-      // Remove "visited" de outros irmãos
-      div.parentElement
-        .querySelectorAll("div")
-        .forEach((sibling) => sibling.classList.remove("visited"));
-      // Adiciona "visited" ao elemento atual
-      div.classList.add("visited");
+    // Evento para touchmove (ajustado para acompanhar o dedo)
+    document.addEventListener("touchmove", (event) => {
+      // Pega a posição do toque na tela
+      const touch = event.touches[0];
+      const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+
+      if (
+        targetElement &&
+        targetElement.parentElement === div.parentElement // Verifica se é do mesmo grupo
+      ) {
+        // Remove "visited" de outros irmãos
+        div.parentElement
+          .querySelectorAll("div")
+          .forEach((sibling) => sibling.classList.remove("visited"));
+        // Adiciona "visited" ao elemento atual
+        targetElement.classList.add("visited");
+      }
     });
 
     // Evento para clique
