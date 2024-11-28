@@ -253,24 +253,7 @@ divTop.addEventListener("mousemove", (e) => {
   cursor.style.height = `${2 + volume * 4}em`;
 });
 
-divTop.addEventListener("touchmove", (e) => {
-  if (!interactionEnabled) return;
 
-  handleTouchMove(
-    e,
-    divTop,
-    (volume) => {
-      if (isMobile()) {
-        // No mobile, ajuste para mais baixo no lado direito e mais alto no lado esquerdo
-        jazz.volume = 1 - volume; // Inverta o volume no mobile
-      } else {
-        jazz.volume = volume;
-      }
-      updateProgressBar(progressJazz, jazz.volume, true);
-    },
-    true
-  );
-});
 
 divRight.addEventListener("mousemove", (e) => {
   if (!interactionEnabled) return;
@@ -307,24 +290,7 @@ divBottom.addEventListener("mousemove", (e) => {
   cursor.style.height = `${2 + volume * 4}em`;
 });
 
-divBottom.addEventListener("touchmove", (e) => {
-  if (!interactionEnabled) return;
 
-  handleTouchMove(
-    e,
-    divBottom,
-    (volume) => {
-      if (isMobile()) {
-        // No mobile, ajuste para mais baixo no lado direito e mais alto no lado esquerdo
-        poesia.volume = 1 - volume; // Inverta o volume no mobile
-      } else {
-        poesia.volume = volume;
-      }
-      updateProgressBar(progressPoesia, poesia.volume, true);
-    },
-    true
-  ); // A interação na divBottom é horizontal
-});
 
 divLeft.addEventListener("mousemove", (e) => {
   if (!interactionEnabled) return;
@@ -349,6 +315,57 @@ divLeft.addEventListener("touchmove", (e) => {
     false
   );
 });
+
+function isSmallScreen() {
+  return window.innerWidth <= 768;
+}
+
+divTop.addEventListener("mousemove", (e) => {
+  if (!interactionEnabled || !isSmallScreen()) return;
+
+  const rect = divTop.getBoundingClientRect();
+  const volume = adjustValue(e.clientX, rect.left + 50, rect.right - 50);
+  jazz.volume = 1 - volume; // Volume mais alto à esquerda, mais baixo à direita
+  /* updateProgressBar(progressJazz, 1 - volume, true); */
+});
+
+divBottom.addEventListener("mousemove", (e) => {
+  if (!interactionEnabled || !isSmallScreen()) return;
+
+  const rect = divBottom.getBoundingClientRect();
+  const volume = adjustValue(e.clientX, rect.left + 50, rect.right - 50);
+  poesia.volume = 1 - volume; // Volume mais alto à esquerda, mais baixo à direita
+  /* updateProgressBar(progressPoesia, 1 - volume, true); */
+});
+
+divTop.addEventListener("touchmove", (e) => {
+  if (!interactionEnabled || !isSmallScreen()) return;
+
+  handleTouchMove(
+    e,
+    divTop,
+    (volume) => {
+      jazz.volume = 1 - volume; // Volume mais alto à esquerda, mais baixo à direita
+      updateProgressBar(progressJazz, 1 - volume, true);
+    },
+    true
+  );
+});
+
+divBottom.addEventListener("touchmove", (e) => {
+  if (!interactionEnabled || !isSmallScreen()) return;
+
+  handleTouchMove(
+    e,
+    divBottom,
+    (volume) => {
+      poesia.volume = 1 - volume; // Volume mais alto à esquerda, mais baixo à direita
+      updateProgressBar(progressPoesia, 1 - volume, true);
+    },
+    true
+  );
+});
+
 
 const hoverLinks = document.querySelectorAll(".hover-link");
 
