@@ -775,6 +775,10 @@ input::placeholder {
   grid-column: 2 / 4;
 }
 
+#faixaInteration3{
+  grid-column: 6 / 7;
+}
+
   .divTop,
   .divBottom {
     grid-template-columns: repeat(6, 1fr);
