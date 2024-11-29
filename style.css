@@ -870,6 +870,7 @@ input::placeholder {
     position: relative;
   }
 
+  
   .mediaTrack .video {
     width: 100vh;
     height: 100vh;
@@ -881,17 +882,14 @@ input::placeholder {
 }
 
 .mediaTrack .legendas {
-  width: calc(100vh / 7 * 6); /* Largura proporcional desejada */
-  height: auto; /* Altura ajustável automaticamente */
+  width: calc(100vh / 7 * 6);
+  height: auto; 
   object-fit: cover;
   position: absolute;
-  top: calc(100vh / 7 * 2); /* Posição no ponto específico do topo */
-  left: 0; /* Alinhado ao lado esquerdo */
-  transform: rotate(-90deg) translateY(-100%); /* Rotação e ajuste de posição */
-  transform-origin: top left; /* Define o ponto de origem da rotação */
+  top: calc(100vh / 7 * 2); 
+  left: 0; 
+  transform: rotate(-90deg) translateY(-100%); 
 }
-
-
 
 .divTop div:nth-child(6),
 .divBottom div:nth-child(6),
@@ -934,6 +932,10 @@ input::placeholder {
 .divRight div:nth-child(1),
 .divLeft div:nth-child(1) {
   --i: 3.5;
+}
+
+.legendas{
+  display: none;
 }
 
 }
