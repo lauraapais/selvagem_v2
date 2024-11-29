@@ -870,7 +870,6 @@ input::placeholder {
     position: relative;
   }
 
-  
   .mediaTrack .video {
     width: 100vh;
     height: 100vh;
@@ -934,5 +933,7 @@ input::placeholder {
   --i: 3.5;
 }
 
-
+.legendas{
+  display: none;
+}
 }
