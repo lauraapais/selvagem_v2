@@ -880,15 +880,18 @@ input::placeholder {
     transform: rotate(-90deg) translateY(-25%);
 }
 
-.mediaTrack .legendas{
-  width: calc(100vh / 7* 6);
-  height: auto;
+.mediaTrack .legendas {
+  width: calc(100vh / 7 * 6); /* Largura proporcional desejada */
+  height: auto; /* Altura ajustável automaticamente */
   object-fit: cover;
   position: absolute;
-  top: 60px;
-  left: calc(var(--vh, 1h)* 100 / 7* 2);
-  transform: rotate(-90deg) translate(0%, 0%);
+  top: calc(100vh / 7 * 2); /* Posição no ponto específico do topo */
+  left: 0; /* Alinhado ao lado esquerdo */
+  transform: rotate(-90deg) translateY(-100%); /* Rotação e ajuste de posição */
+  transform-origin: top left; /* Define o ponto de origem da rotação */
 }
+
+
 
 .divTop div:nth-child(6),
 .divBottom div:nth-child(6),
